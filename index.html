@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="fajr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>NafsCare Pro</title>
+    <meta name="theme-color" id="metaTheme" content="#eef4f0">
+    <!-- প্রথম পেইন্টের আগেই থিম বসায়, তাই ঝলক (flash) লাগে না -->
+    <script>try { var t = localStorage.getItem('nafscare_theme2'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <main id="scroll" class="scroll">
+            <section class="tab on" id="tab-home" aria-label="হোম"></section>
+            <section class="tab" id="tab-track" aria-label="নামাজ ও আমল ট্র্যাকার"></section>
+            <section class="tab" id="tab-report" aria-label="রিপোর্ট"></section>
+            <section class="tab" id="tab-tasbeeh" aria-label="তাসবিহ"></section>
+            <section class="tab" id="tab-quran" aria-label="কুরআন"></section>
+            <section class="tab" id="tab-profile" aria-label="প্রোফাইল"></section>
+            <noscript><p style="padding:24px">অ্যাপ চালাতে JavaScript চালু থাকতে হবে।</p></noscript>
+        </main>
+
+        <!-- কুরআনের প্লেয়ার: ট্যাব বদলালেও চলতে থাকে -->
+        <div id="playerBar" class="pbar" hidden></div>
+
+        <nav id="nav" class="nav" aria-label="প্রধান মেনু"></nav>
+
+        <div id="toasts" class="toasts" aria-live="polite"></div>
+        <div id="sheetRoot" class="sheet-root"></div>
+        <div id="dlgRoot" class="dlg-root"></div>
+
+        <audio id="qAudio" preload="none"></audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
