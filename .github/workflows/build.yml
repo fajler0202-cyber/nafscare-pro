@@ -17,10 +17,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Dependencies
+      - name: Install Dependencies & Capacitor
         run: |
           npm install
-          npx cap sync android
+          npx cap update android
 
       - name: Setup Java
         uses: actions/setup-java@v4
