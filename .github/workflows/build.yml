@@ -15,14 +15,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
 
       - name: Install Dependencies
         run: |
           npm install
-          npm install @capacitor/android
-          npx cap add android
-          npx cap copy android
+          npx cap sync android
 
       - name: Setup Java
         uses: actions/setup-java@v4
