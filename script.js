@@ -1747,7 +1747,7 @@ function authHTML() {
         '<p class="muted sm">ইমেইল দিয়ে ঢুকলে আপনার সব ইতিহাস ক্লাউডে সুরক্ষিত থাকে। অ্যাপ মুছে আবার ইনস্টল করলেও একই ইমেইলে ঢুকে সব ফিরে পাবেন।</p>' +
         '<form id="authForm" class="stack" novalidate>' +
 (authMode === 'up' ? '<label class="lbl">আপনার নাম<input id="authName" class="field" type="text" maxlength="40" autocomplete="nickname" placeholder="যেমনঃ আব্দুল্লাহ" required></label>' : '') +
-'<label class="lbl">ইমেইল<input id="authEmail" class="field" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required></label>' +i
+'<label class="lbl">ইমেইল<input id="authEmail" class="field" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required></label>' +
         '<label class="lbl">পাসওয়ার্ড<input id="authPass" class="field" type="password" autocomplete="' + (authMode === 'up' ? 'new-password' : 'current-password') + '" placeholder="কমপক্ষে ৬ অক্ষর" minlength="6" required></label>' +
         (authMode === 'up' ? '<label class="lbl">পাসওয়ার্ড আবার লিখুন<input id="authPass2" class="field" type="password" autocomplete="new-password" placeholder="একই পাসওয়ার্ড" required></label>' : '') +
         '<p id="authErr" class="err" role="alert" hidden></p>' +
