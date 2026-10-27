@@ -1745,7 +1745,9 @@ let authMode = 'in', authBusy = false;
 function authHTML() {
     return segHTML([['in', 'সাইন ইন'], ['up', 'নতুন অ্যাকাউন্ট']], authMode, 'auth-tab') +
         '<p class="muted sm">ইমেইল দিয়ে ঢুকলে আপনার সব ইতিহাস ক্লাউডে সুরক্ষিত থাকে। অ্যাপ মুছে আবার ইনস্টল করলেও একই ইমেইলে ঢুকে সব ফিরে পাবেন।</p>' +
-        '<form id="authForm" class="stack" novalidate><label class="lbl">ইমেইল<input id="authEmail" class="field" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required></label>' +
+        '<form id="authForm" class="stack" novalidate>' +
+(authMode === 'up' ? '<label class="lbl">আপনার নাম<input id="authName" class="field" type="text" maxlength="40" autocomplete="nickname" placeholder="যেমনঃ আব্দুল্লাহ" required></label>' : '') +
+'<label class="lbl">ইমেইল<input id="authEmail" class="field" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required></label>' +i
         '<label class="lbl">পাসওয়ার্ড<input id="authPass" class="field" type="password" autocomplete="' + (authMode === 'up' ? 'new-password' : 'current-password') + '" placeholder="কমপক্ষে ৬ অক্ষর" minlength="6" required></label>' +
         (authMode === 'up' ? '<label class="lbl">পাসওয়ার্ড আবার লিখুন<input id="authPass2" class="field" type="password" autocomplete="new-password" placeholder="একই পাসওয়ার্ড" required></label>' : '') +
         '<p id="authErr" class="err" role="alert" hidden></p>' +
@@ -1768,14 +1770,23 @@ document.addEventListener('submit', async e => {
     e.preventDefault();
     if (authBusy) return;
     const email = $('#authEmail').value.trim(), pass = $('#authPass').value;
+    const name = authMode === 'up' ? ($('#authName').value || '').trim() : '';
+    if (authMode === 'up' && !name) { authError('আপনার নাম লিখুন'); return; }
     if (!/^\S+@\S+\.\S+$/.test(email)) { authError('ইমেইল ঠিকানাটি সঠিক নয়'); return; }
     if (pass.length < 6) { authError('পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের দিন'); return; }
     if (authMode === 'up' && $('#authPass2').value !== pass) { authError('দুই জায়গায় পাসওয়ার্ড মেলেনি'); return; }
     authError(''); authBusy = true; const btn = $('#authGo'); btn.disabled = true; btn.textContent = 'অপেক্ষা করুন…';
     try {
         if (!(await cloudInit())) throw { code: 'auth/network-request-failed' };
-        if (authMode === 'up') await Cloud.auth.createUserWithEmailAndPassword(email, pass); else await Cloud.auth.signInWithEmailAndPassword(email, pass);
-        if (Cloud.syncP) await Cloud.syncP;
+        if (authMode === 'up') {
+            await Cloud.auth.createUserWithEmailAndPassword(email, pass);
+            if (Cloud.syncP) await Cloud.syncP;
+            S.user.name = name; S.user.ts = Date.now(); saveState(); refreshUI();
+            await cloudPush();
+        } else {
+            await Cloud.auth.signInWithEmailAndPassword(email, pass);
+            if (Cloud.syncP) await Cloud.syncP;
+        }
         closeSheet(true); toast(authMode === 'up' ? 'অ্যাকাউন্ট তৈরি হয়েছে, ডেটা সেভ হচ্ছে' : 'সাইন ইন হয়েছে, ইতিহাস মিলিয়ে নেওয়া হয়েছে');
     } catch (err) { authError(AUTH_ERR[err && err.code] || 'সাইন ইন করা যায়নি, আবার চেষ্টা করুন'); btn.disabled = false; btn.textContent = authMode === 'up' ? 'অ্যাকাউন্ট খুলুন' : 'সাইন ইন করুন'; }
     authBusy = false;
