@@ -288,7 +288,7 @@ function defaultState() {
         user: { name: 'মুসাফির', avatar: 'mosque', gender: 'auto', ts: 0 },
         set: {
             theme: 'fajr', auto: false, method: 1, school: 1, arSize: 30, showBn: true, autoNext: true, ayahReciter: 'Alafasy_128kbps',
-            f: { sunnah: true, qada: true, qadaGap: true, forbidden: true, hadith: true, vib: true, sound: false },
+            f: { sunnah: true, qada: true, qadaGap: true, forbidden: true, hadith: true, vib: true, sound: false, ramadan: true },
             n: { prayer: false, hadith: false },
             ts: 0
         },
@@ -296,8 +296,8 @@ function defaultState() {
         qada: { items: [], base: { fajr: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }, baseTs: 0 },
         tas: { sessions: [], cur: { k: 'subhanallah', n: 0, goal: 33, ts: 0 } },
         quran: { last: { s: 1, a: 1, ts: 0 }, marks: [], hifz: {}, rec: null, recTs: 0 },
+        habits: [],
         meta: { created: t, qadaFrom: t, lastSeen: today, lvl: 0, hSlotN: -1, pNotif: '' }
-    };
 }
 function fillDefaults(t, d) {
     Object.keys(d).forEach(k => {
