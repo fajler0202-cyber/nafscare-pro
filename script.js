@@ -1818,7 +1818,49 @@ ACT['about-open'] = () => {
         '<h4 class="sub-h">হাদিস সম্পর্কে</h4><p class="muted sm">হাদিসগুলো বাংলা ভাবার্থ। আমলের আগে নির্ভরযোগ্য আলেমের কাছে যাচাই করে নেওয়া ভালো।</p>' +
         '<p class="made">তৈরি করেছে <b>FajleVerse</b>, ভালোবাসা ও দোয়ার সাথে।</p></div>', { title: 'অ্যাপ সম্পর্কে' });
 };
-
+/* ===== অভ্যাস ত্যাগ ট্র্যাকার + রমজান কাউন্টডাউন ===== */
+const RAMADAN_DATES = ['2027-02-09', '2028-01-28'];
+function ramadanCountdownHTML() {
+    const today = dkey();
+    const next = RAMADAN_DATES.find(d => d >= today);
+    if (!next) return '';
+    const d = daysBetween(today, next);
+    if (d <= 0) return '';
+    return '<section class="card" aria-label="রমজান কাউন্টডাউন"><div class="card-h"><h2 class="tiro">' + icon('crescent', 20, 2) + ' রমজান পর্যন্ত বাকি</h2></div>' +
+        '<p class="tiro" style="font-size:30px;margin:4px 0">' + bn(d) + ' দিন</p>' +
+        '<p class="muted xs">আনুমানিক তারিখ, চাঁদ দেখার উপর নির্ভরশীল (১ দিন আগে-পরে হতে পারে)</p></section>';
+}
+function habitsCardHTML() {
+    const today = dkey();
+    const rows = S.habits.map(h => {
+        const d = daysBetween(h.start, today);
+        return '<div class="swr"><span class="lr-t"><b>' + esc(h.name) + '</b><small class="muted">' + bn(Math.max(0, d)) + ' দিন ধরে বিরত</small></span>' +
+            '<span style="display:flex;gap:6px"><button type="button" class="iconbtn sm" data-act="habit-reset" data-id="' + h.id + '" aria-label="আবার শুরু">' + icon('undo', 18, 2.2) + '</button>' +
+            '<button type="button" class="iconbtn sm" data-act="habit-del" data-id="' + h.id + '" aria-label="মুছুন">' + icon('trash', 18, 2.2) + '</button></span></div>';
+    }).join('');
+    return '<section class="card"><div class="card-h"><h2 class="tiro">অভ্যাস ত্যাগ ট্র্যাকার</h2></div>' +
+        (S.habits.length ? rows : '<p class="muted sm">যে অভ্যাস ছাড়তে চান, সেটা যোগ করুন — প্রতিদিন কত দিন ধরে বিরত আছেন দেখতে পাবেন।</p>') +
+        '<button type="button" class="btn outline wide" data-act="habit-add" style="margin-top:10px">' + icon('plus', 18, 2.2) + ' নতুন অভ্যাস যোগ করুন</button></section>';
+}
+ACT['habit-add'] = () => {
+    openSheet('<label class="lbl">কোন অভ্যাস ছাড়তে চান?<input id="habitName" class="field" type="text" maxlength="40" placeholder="যেমনঃ ধূমপান"></label>' +
+        '<button type="button" class="btn primary xl wide" data-act="habit-save">শুরু করুন</button>', { title: 'নতুন অভ্যাস' });
+};
+ACT['habit-save'] = () => {
+    const name = ($('#habitName').value || '').trim();
+    if (!name) { toast('নাম লিখুন'); return; }
+    S.habits.push({ id: 'h' + Date.now(), name: name, start: dkey() });
+    closeSheet(true); saveState(); refreshUI(); toast('যোগ হয়েছে, আজ থেকে গোনা শুরু');
+};
+ACT['habit-reset'] = async el => {
+    if (!(await ask({ title: 'আবার শুরু করবেন?', text: 'দিনের হিসাব আজ থেকে আবার শুরু হবে।', ok: 'আবার শুরু' }))) return;
+    const h = S.habits.find(x => x.id === el.dataset.id); if (!h) return;
+    h.start = dkey(); saveState(); refreshUI();
+};
+ACT['habit-del'] = async el => {
+    if (!(await ask({ title: 'মুছে ফেলবেন?', text: 'এই অভ্যাসের ট্র্যাকিং মুছে যাবে।', ok: 'মুছুন', danger: true }))) return;
+    S.habits = S.habits.filter(x => x.id !== el.dataset.id); saveState(); refreshUI();
+};
 /* ===== ২৪. প্রোফাইল ===== */
 function cloudCardHTML() {
     if (Cloud.user) return '<section class="card"><div class="card-h"><h2 class="tiro">অ্যাকাউন্ট</h2><span class="chip">' + icon('cloud', 14, 2.2) + ' ক্লাউডে সুরক্ষিত</span></div>' +
