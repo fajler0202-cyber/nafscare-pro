@@ -1881,6 +1881,7 @@ RENDER.profile = function () {
         '<section class="card stats3 plain"><div class="st"><span class="muted sm">মোট দিন</span><b class="tiro">' + bn(activeDaysCount()) + '</b></div><div class="st"><span class="muted sm">স্ট্রেইক</span><b class="tiro">' + bn(streak()) + '</b></div><div class="st"><span class="muted sm">মোট পয়েন্ট</span><b class="tiro">' + bn(pts) + '</b></div></section>' +
         '<button type="button" class="card setrow" data-act="settings-open"><span class="sr-i">' + icon('gear', 24) + '</span><span class="lr-t"><b class="tiro">সেটিং</b><small class="muted">থিম, ফিচার, নামাজের হিসাব, নোটিফিকেশন, ডেটা</small></span>' + icon('fwd', 20, 2.2) + '</button>' +
         cloudCardHTML() +
+        habitsCardHTML() +
         '<section class="card"><div class="card-h"><h2 class="tiro">ব্যাজ ও লেভেল</h2><span class="muted sm">' + bn(shown + 1) + '/১০ অর্জিত</span></div><div class="badges">' +
         LEVELS.map((L, i) => '<div class="bdg' + (i > shown ? ' lk' : '') + '">' + medal(i, i < shown ? 'done' : i === shown ? 'current' : 'locked', 'p') + '<b>' + L[0] + '</b><small class="muted">' + bn(L[1]) + ' পয়েন্ট</small></div>').join('') + '</div></section>' +
         '<section class="card"><div class="card-h"><h2 class="tiro">ডেটা ও নিরাপত্তা</h2></div><p class="muted sm">অ্যাপ আপডেট করলেও আপনার সব ইতিহাস আগের মতোই থাকে। চাইলে আলাদা ব্যাকআপও রাখতে পারেন।</p>' +
