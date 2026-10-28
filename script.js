@@ -889,6 +889,8 @@ RENDER.home = function () {
         '<button type="button" class="st lvst" data-act="go" data-tab="profile" aria-label="লেভেল ও ব্যাজ দেখুন"><span class="mini-medal">' + medal(bl, 'current', 'h') + '</span><b class="tiro">লেভেল ' + bn(bl + 1) + '</b><small>' + LEVELS[bl][0] + '</small></button></section>' +
         (S.set.f.hadith ? '<article class="card hadith" id="hadithBox" data-slot="' + sl + '"><div class="orn"><span></span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg><span></span></div>' +
             '<div class="hd-top"><b class="tiro">হাদিস</b><small class="muted">ভাবার্থ</small></div><p class="hd-text tiro">' + esc(h.t) + '</p>' +
+                     (h.rawi ? '<p class="muted xs">বর্ণনাকারীঃ ' + esc(h.rawi) + '</p>' : '') +
+            (h.exp ? '<p class="muted sm hd-exp">' + esc(h.exp) + '</p>' : '') +
             '<div class="hd-foot"><span class="muted sm">' + esc(h.r) + '</span><button type="button" class="iconbtn sm" data-act="copy-hadith" aria-label="হাদিস কপি করুন">' + icon('copy', 18) + '</button></div>' +
             '<p class="muted xs hd-next">পরের হাদিস আসবে ' + hadithNextAt() + '-এ</p></article>' : '') +
         (S.set.f.ramadan ? ramadanCountdownHTML() : '') +
