@@ -890,6 +890,7 @@ RENDER.home = function () {
             '<div class="hd-top"><b class="tiro">হাদিস</b><small class="muted">ভাবার্থ</small></div><p class="hd-text tiro">' + esc(h.t) + '</p>' +
             '<div class="hd-foot"><span class="muted sm">' + esc(h.r) + '</span><button type="button" class="iconbtn sm" data-act="copy-hadith" aria-label="হাদিস কপি করুন">' + icon('copy', 18) + '</button></div>' +
             '<p class="muted xs hd-next">পরের হাদিস আসবে ' + hadithNextAt() + '-এ</p></article>' : '') +
+        (S.set.f.ramadan ? ramadanCountdownHTML() : '') +
         '<section class="card" aria-label="আজকের আমল"><div class="card-h"><h2 class="tiro">আজকের আমল</h2><span class="muted sm">' + fmtShort(k) + '</span></div>' +
         missionRow({ done: nF >= 5, title: 'ফরজ নামাজ', sub: bn(nF) + ' / ৫ ওয়াক্ত সম্পন্ন', pts: P_FARD * 5, pct: nF * 20, attrs: 'data-act="go" data-tab="track"' }) +
         DEEDS.map(d => missionRow({ done: !!(rec && rec.a && rec.a[d.k]), title: d.n, sub: d.sub, pts: P_DEED, pct: 0, attrs: 'data-act="deed" data-d="' + d.k + '" data-k="' + k + '"' })).join('') + '</section>' +
