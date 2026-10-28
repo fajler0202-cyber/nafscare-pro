@@ -902,7 +902,7 @@ RENDER.home = function () {
         '<button type="button" class="qk" data-act="go" data-tab="quran">' + icon('book', 20, 2) + '<span><b>চালিয়ে পড়ুন</b><small>সূরা ' + sur.bn + ', আয়াত ' + bn(last.a || 1) + '</small></span></button>' +
         '<button type="button" class="qk" data-act="go" data-tab="tasbeeh">' + icon('beads', 20, 2) + '<span><b>তাসবিহ</b><small>আজ ' + bn((rec && rec.tas) || 0) + ' বার</small></span></button></div>';
 };
-ACT['copy-hadith'] = () => { const h = hadithNow(); copyText('“' + h.t + '”\n— ' + h.r); };
+ACT['copy-hadith'] = () => { const h = hadithNow(); copyText('“' + h.t + '”\n— ' + h.r + (h.rawi ? ' | বর্ণনাকারীঃ ' + h.rawi : '')); };
 ACT.deed = el => {
     const k = el.dataset.k || dkey(), rec = rec4(k), d = el.dataset.d;
     if (rec.a[d]) delete rec.a[d]; else { rec.a[d] = 1; vibrate(20); }
