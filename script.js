@@ -297,7 +297,8 @@ function defaultState() {
         tas: { sessions: [], cur: { k: 'subhanallah', n: 0, goal: 33, ts: 0 } },
         quran: { last: { s: 1, a: 1, ts: 0 }, marks: [], hifz: {}, rec: null, recTs: 0 },
         habits: [],
-        meta: { created: t, qadaFrom: t, lastSeen: today, lvl: 0, hSlotN: -1, pNotif: '' }
+                meta: { created: t, qadaFrom: t, lastSeen: today, lvl: 0, hSlotN: -1, pNotif: '' }
+    };
 }
 function fillDefaults(t, d) {
     Object.keys(d).forEach(k => {
