@@ -1628,10 +1628,7 @@ function readerHTML() {
     else if (s < 114) out.push('<button type="button" class="btn primary" data-act="sur-step" data-d="1">পরের সূরা: ' + SURAHS[s].bn + '</button>');
     return head + '<div class="alist">' + out.join('') + '</div>';
 }
-RENDER.quran = function () {
-    const el = $('#tab-quran');
-    el.innerHTML = '<header class="top"><div class="top-l"><span class="muted sm">কুরআন</span><h1 class="tiro h1">শুনুন, পড়ুন, মুখস্থ করুন</h1></div></header>' +
-        function tafsirHTML() {
+       function tafsirHTML() {
     const s = Q.s, sur = SURAHS[s - 1], t = Q.text[s];
     let head = '<div class="sur-head"><button type="button" class="iconbtn" data-act="sur-step" data-d="-1"' + (s <= 1 ? ' disabled' : '') + ' aria-label="আগের সূরা">' + icon('back', 20, 2.4) + '</button>' +
         '<button type="button" class="sh-m" data-act="sur-open" aria-label="সূরা বদলান"><span class="ar sh-ar" lang="ar">' + esc((t && t.name) || '') + '</span><b>সূরা ' + sur.bn + '</b><small class="muted">' + sur.t + ', ' + bn(sur.v) + ' আয়াত</small></button>' +
