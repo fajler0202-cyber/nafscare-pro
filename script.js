@@ -1235,7 +1235,8 @@ const AYAH_RECS = [
 const Q = {
     mode: 'listen', s: 1, recs: [], recsState: 'idle', text: {}, tState: '', limit: 25, filter: '', seekT: 0,
     hifz: { from: 1, to: 5, rep: 3, hide: 'ar', loop: false }, reveal: {},
-    play: { kind: null, s: 0, a: 0, loading: false, loop: false }
+        play: { kind: null, s: 0, a: 0, loading: false, loop: false },
+    tafsir: {}, tfState: ''
 };
 const SETC = {};
 const curRec = () => S.quran.rec || DEFAULT_REC;
