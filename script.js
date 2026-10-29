@@ -1328,10 +1328,16 @@ async function loadTafsir(n, tid) {
     const ck = 'taf' + n + '_' + tid;
     const c = await IDB.get(ck);
     if (c && c.length) { Q.tafsir[key] = c; return c; }
-    const j = await fetchJSON('https://api.islamic.app/v1/verses/by_chapter/' + n + '?tafsirs=' + tid, 22000);
-    const verses = (j && (j.verses || j.data || j.result)) || [];
     const arr = [];
-    verses.forEach((v, i) => { arr[ayahNumOf(v, i) - 1] = stripTafsirHTML(tafsirTextOf(v)); });
+    let page = 1, pages = 1;
+    do {
+        const j = await fetchJSON('https://api.islamic.app/v1/verses/by_chapter/' + n + '?tafsirs=' + tid + '&per_page=50&page=' + page, 22000);
+        const d = (j && j.data) || {};
+        const verses = d.verses || [];
+        verses.forEach((v, i) => { arr[ayahNumOf(v, i) - 1] = stripTafsirHTML(tafsirTextOf(v)); });
+        pages = (d.pagination && d.pagination.pages) || 1;
+        page++;
+    } while (page <= pages);
     if (!arr.length) throw new Error('empty');
     Q.tafsir[key] = arr; IDB.set(ck, arr);
     return arr;
