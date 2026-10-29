@@ -1262,6 +1262,8 @@ async function loadReciters() {
             if (!m || !m.server) return;
             list.push({ id: r.id + '-' + m.id, name: r.name + (r.moshaf.length > 1 && m.name ? ' — ' + m.name : ''), srv: m.server.slice(-1) === '/' ? m.server : m.server + '/', list: m.surah_list || '' });
         }));
+               const curated = list.filter(r => RECITER_KEYWORDS.some(k => r.name.toLowerCase().includes(k)));
+        if (curated.length) list = curated;
         list.sort((a, b) => a.name.localeCompare(b.name));
         if (list.length) IDB.set('recs', list);
     } catch (e) { list = null; }
