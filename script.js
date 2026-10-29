@@ -1631,9 +1631,38 @@ function readerHTML() {
 RENDER.quran = function () {
     const el = $('#tab-quran');
     el.innerHTML = '<header class="top"><div class="top-l"><span class="muted sm">কুরআন</span><h1 class="tiro h1">শুনুন, পড়ুন, মুখস্থ করুন</h1></div></header>' +
-        segHTML([['listen', 'শুনুন'], ['read', 'পড়ুন'], ['hifz', 'হিফজ']], Q.mode, 'qmode') +
-        (Q.mode === 'listen' ? listenHTML() : readerHTML());
+        function tafsirHTML() {
+    const s = Q.s, sur = SURAHS[s - 1], t = Q.text[s];
+    let head = '<div class="sur-head"><button type="button" class="iconbtn" data-act="sur-step" data-d="-1"' + (s <= 1 ? ' disabled' : '') + ' aria-label="আগের সূরা">' + icon('back', 20, 2.4) + '</button>' +
+        '<button type="button" class="sh-m" data-act="sur-open" aria-label="সূরা বদলান"><span class="ar sh-ar" lang="ar">' + esc((t && t.name) || '') + '</span><b>সূরা ' + sur.bn + '</b><small class="muted">' + sur.t + ', ' + bn(sur.v) + ' আয়াত</small></button>' +
+        '<button type="button" class="iconbtn" data-act="sur-step" data-d="1"' + (s >= 114 ? ' disabled' : '') + ' aria-label="পরের সূরা">' + icon('fwd', 20, 2.4) + '</button></div>';
+    head += '<div class="tools"><div class="chips">' + TAFSIRS.map(x => '<button type="button" class="chip-b' + (S.set.tafsirId === x[0] ? ' on' : '') + '" data-act="tafsir-pick" data-v="' + x[0] + '">' + x[1] + '</button>').join('') + '</div></div>';
+    if (!t) return head + '<div class="card center"><div class="spin" aria-hidden="true"></div><p class="muted">সূরা আসছে…</p></div>';
+    const key = s + ':' + S.set.tafsirId, arr = Q.tafsir[key];
+    if (!arr) {
+        const body = Q.tfState === 'fail' ? '<div class="card center"><p>তাফসীর আনা যায়নি। ইন্টারনেট সংযোগ চেক করুন।</p><button type="button" class="btn primary" data-act="tafsir-retry">আবার চেষ্টা করুন</button></div>'
+            : '<div class="card center"><div class="spin" aria-hidden="true"></div><p class="muted">তাফসীর আসছে…</p></div>';
+        return head + body;
+    }
+    const out = [];
+    for (let a = 1; a <= sur.v; a++) {
+        out.push('<article class="ayah" id="tf-' + a + '"><div class="ay-h"><span class="ay-n">' + bn(a) + '</span></div>' +
+            '<p class="ar-text" lang="ar" dir="rtl" style="font-size:' + (S.set.arSize || 30) + 'px">' + esc((t.ar && t.ar[a - 1]) || '') + '</p>' +
+            (S.set.showBn && t.bn && t.bn[a - 1] ? '<p class="ay-tr">' + esc(t.bn[a - 1]) + '</p>' : '') +
+            '<p class="muted sm tafsir-text">' + esc(arr[a - 1] || 'এই আয়াতের তাফসীর পাওয়া যায়নি।').replace(/\n/g, '<br>') + '</p></article>');
+    }
+    return head + '<div class="alist">' + out.join('') + '</div>';
+}
+RENDER.quran = function () {
+    const el = $('#tab-quran');
+    el.innerHTML = '<header class="top"><div class="top-l"><span class="muted sm">কুরআন</span><h1 class="tiro h1">শুনুন, পড়ুন, বুঝুন</h1></div></header>' +
+        segHTML([['listen', 'শুনুন'], ['read', 'পড়ুন'], ['tafsir', 'তাফসীর']], Q.mode, 'qmode') +
+        (Q.mode === 'listen' ? listenHTML() : Q.mode === 'tafsir' ? tafsirHTML() : readerHTML());
     if (Q.mode === 'listen') { if (Q.recsState === 'idle') loadReciters(); }
+    else if (Q.mode === 'tafsir') {
+        if (!Q.text[Q.s] && Q.tState !== 'loading' && Q.tState !== 'fail') ensureText();
+        if (!Q.tafsir[Q.s + ':' + S.set.tafsirId] && Q.tfState !== 'loading' && Q.tfState !== 'fail') ensureTafsir();
+    }
     else if (!Q.text[Q.s] && Q.tState !== 'loading' && Q.tState !== 'fail') ensureText();
     markPlaying(false);
 };
