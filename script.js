@@ -1297,6 +1297,51 @@ async function ensureText() {
     Q.tState = 'loading';
     try { await loadSurah(n); Q.tState = ''; } catch (e) { Q.tState = 'fail'; }
     if (curTab === 'quran' && Q.mode !== 'listen' && Q.s === n) renderTab('quran');
+} /* ---- তাফসীর (ব্যাখ্যা): api.islamic.app থেকে, একবার নামলে অফলাইনেও থাকে ---- */
+const TAFSIRS = [
+    ['bn-tafsir-abu-bakr-zakaria', 'আবু বকর যাকারিয়া'],
+    ['bn-tafsir-ahsanul-bayaan', 'আহসানুল বায়ান'],
+    ['bn-tafseer-ibn-e-kaseer', 'ইবনে কাসীর'],
+    ['tafisr-fathul-majid-bn', 'ফাতহুল মাজীদ']
+];
+function stripTafsirHTML(html) {
+    let s = String(html || '');
+    s = s.replace(/<\/(p|div)\s*>/gi, '\n\n').replace(/<br\s*\/?>/gi, '\n');
+    s = s.replace(/<[^>]+>/g, '');
+    s = s.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    return s.replace(/\n{3,}/g, '\n\n').trim();
+}
+function tafsirTextOf(v) {
+    if (v.tafsirs && v.tafsirs.length) return v.tafsirs[0].text || '';
+    if (v.text) return v.text;
+    return '';
+}
+function ayahNumOf(v, i) {
+    if (v.verse_number) return v.verse_number;
+    if (v.numberInSurah) return v.numberInSurah;
+    if (v.verse_key) { const p = String(v.verse_key).split(':'); if (p[1]) return +p[1]; }
+    return i + 1;
+}
+async function loadTafsir(n, tid) {
+    const key = n + ':' + tid;
+    if (Q.tafsir[key]) return Q.tafsir[key];
+    const ck = 'taf' + n + '_' + tid;
+    const c = await IDB.get(ck);
+    if (c && c.length) { Q.tafsir[key] = c; return c; }
+    const j = await fetchJSON('https://api.islamic.app/v1/verses/by_chapter/' + n + '?tafsirs=' + tid, 22000);
+    const verses = (j && (j.verses || j.data || j.result)) || [];
+    const arr = [];
+    verses.forEach((v, i) => { arr[ayahNumOf(v, i) - 1] = stripTafsirHTML(tafsirTextOf(v)); });
+    if (!arr.length) throw new Error('empty');
+    Q.tafsir[key] = arr; IDB.set(ck, arr);
+    return arr;
+}
+async function ensureTafsir() {
+    const n = Q.s, tid = S.set.tafsirId, key = n + ':' + tid;
+    if (Q.tafsir[key]) { Q.tfState = ''; return; }
+    Q.tfState = 'loading';
+    try { await loadTafsir(n, tid); Q.tfState = ''; } catch (e) { Q.tfState = 'fail'; }
+    if (curTab === 'quran' && Q.mode === 'tafsir' && Q.s === n) renderTab('quran');
 }
 async function downloadAllSurahs(onProg) {
     let done = 0, fail = 0, i = 1;
