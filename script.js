@@ -287,7 +287,7 @@ function defaultState() {
         v: 2,
         user: { name: 'মুসাফির', avatar: 'mosque', gender: 'auto', ts: 0 },
         set: {
-            theme: 'fajr', auto: false, method: 1, school: 1, arSize: 30, showBn: true, autoNext: true, ayahReciter: 'Alafasy_128kbps',
+            theme: 'fajr', auto: false, method: 1, school: 1, arSize: 30, showBn: true, autoNext: true, ayahReciter: 'Alafasy_128kbps', tafsirId: 'bn-tafsir-abu-bakr-zakaria',
             f: { sunnah: true, qada: true, qadaGap: true, forbidden: true, hadith: true, vib: true, sound: false, ramadan: true },
             n: { prayer: false, hadith: false },
             ts: 0
