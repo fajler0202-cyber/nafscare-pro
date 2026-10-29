@@ -1529,6 +1529,8 @@ ACT['tr-toggle'] = () => { S.set.showBn = !S.set.showBn; S.set.ts = Date.now(); 
 ACT['auto-next'] = () => { S.set.autoNext = !S.set.autoNext; S.set.ts = Date.now(); saveState(); refreshUI(); };
 ACT['q-more'] = () => { Q.limit += 25; refreshUI(); };
 ACT['q-retry'] = () => { Q.tState = ''; ensureText(); refreshUI(); };
+ACT['tafsir-retry'] = () => { Q.tfState = ''; ensureTafsir(); refreshUI(); };
+ACT['tafsir-pick'] = el => { S.set.tafsirId = el.dataset.v; S.set.ts = Date.now(); saveState(); Q.tfState = ''; refreshUI(); };
 ACT['q-continue'] = () => { const l = S.quran.last; Q.mode = 'read'; openSurah(l.s || 1, l.a || 1); };
 ACT['listen-play'] = el => { const n = +el.dataset.s, P = Q.play, a = AUD(); if (P.kind === 'surah' && P.s === n && !P.ended) { if (a.paused) a.play().catch(() => { }); else a.pause(); } else playSurah(n); };
 ACT['ay-play'] = el => { const a = +el.dataset.a; playAyah(Q.s, a, { rep: 1 }); };
