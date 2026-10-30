@@ -546,3 +546,21 @@ body.has-player .toasts { bottom: calc(190px + env(safe-area-inset-bottom, 0px))
 @keyframes medal-in { 0% { transform: scale(0.4) rotate(-12deg); opacity: 0; } 100% { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 @media (min-width: 700px) { .scroll { padding-left: 24px; padding-right: 24px; } }
+/* ---------- রমজান কাউন্টডাউন কার্ড ---------- */
+.ramadan-card {
+    position: relative; overflow: hidden; padding: 0; border: none;
+    background: radial-gradient(130% 90% at 72% 20%, #2a2016 0%, #1a140d 40%, #0c0906 100%);
+    color: #f3ede0; box-shadow: 0 14px 34px rgba(5, 15, 20, .5);
+}
+.rm-scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+.rm-content { position: relative; padding: 16px 18px 18px; }
+.rm-top { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; color: #f0a030; }
+.rm-top b { font-size: 15px; color: #f3ede0; text-shadow: 0 1px 4px rgba(0, 0, 0, .6); }
+.rm-cnt { display: flex; justify-content: space-between; gap: 6px; margin: 10px 0 16px; }
+.rm-u { flex: 1; background: rgba(0, 0, 0, .4); border: 1px solid rgba(240, 160, 48, .35); border-radius: 14px; padding: 10px 4px; text-align: center; }
+.rm-u b { display: block; font-size: 22px; font-weight: 700; color: #f6d98a; font-variant-numeric: tabular-nums; }
+.rm-u small { font-size: 10px; color: #e3dac2; }
+.rm-dua { background: rgba(0, 0, 0, .5); border: 1px solid rgba(240, 160, 48, .3); border-radius: 14px; padding: 14px; }
+.rm-ar { font-size: 18px; text-align: center; line-height: 2; color: #f6d98a; margin-bottom: 6px; }
+.rm-bn { font-size: 12.5px; color: #e3dac2; line-height: 1.6; text-align: center; }
+.rm-note { font-size: 10.5px; color: #cdbfa0; margin-top: 10px; text-align: center; display: block; }
