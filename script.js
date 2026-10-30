@@ -1910,12 +1910,62 @@ function ramadanCountdownHTML() {
     const today = dkey();
     const next = RAMADAN_DATES.find(d => d >= today);
     if (!next) return '';
-    const d = daysBetween(today, next);
-    if (d <= 0) return '';
-    return '<section class="card" aria-label="রমজান কাউন্টডাউন"><div class="card-h"><h2 class="tiro">' + icon('crescent', 20, 2) + ' রমজান পর্যন্ত বাকি</h2></div>' +
-        '<p class="tiro" style="font-size:30px;margin:4px 0">' + bn(d) + ' দিন</p>' +
-        '<p class="muted xs">আনুমানিক তারিখ, চাঁদ দেখার উপর নির্ভরশীল (১ দিন আগে-পরে হতে পারে)</p></section>';
+    const ms = new Date(next + 'T00:00:00') - new Date();
+    if (ms <= 0) return '';
+    return '<section class="card ramadan-card" aria-label="রমজান কাউন্টডাউন" data-ramadan="' + next + '">' +
+        '<svg class="rm-scene" viewBox="0 0 380 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>' +
+        '<filter id="rmBlur"><feGaussianBlur stdDeviation="5"/></filter>' +
+        '<radialGradient id="rmG1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffb347" stop-opacity=".85"/><stop offset="100%" stop-color="#ffb347" stop-opacity="0"/></radialGradient>' +
+        '<radialGradient id="rmG2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff8c42" stop-opacity=".8"/><stop offset="100%" stop-color="#ff8c42" stop-opacity="0"/></radialGradient>' +
+        '<radialGradient id="rmG3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#5ec9c0" stop-opacity=".55"/><stop offset="100%" stop-color="#5ec9c0" stop-opacity="0"/></radialGradient>' +
+        '<radialGradient id="rmG4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#b968e0" stop-opacity=".4"/><stop offset="100%" stop-color="#b968e0" stop-opacity="0"/></radialGradient>' +
+        '<radialGradient id="rmFlame" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff6cf"/><stop offset="100%" stop-color="#ffb347" stop-opacity="0"/></radialGradient>' +
+        '<linearGradient id="rmBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9c468"/><stop offset="1" stop-color="#9a6c22"/></linearGradient>' +
+        '<linearGradient id="rmBodyDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9842f"/><stop offset="1" stop-color="#6e4a18"/></linearGradient>' +
+        '</defs>' +
+        '<g filter="url(#rmBlur)">' +
+        '<circle cx="40" cy="40" r="14" fill="url(#rmG1)"/><circle cx="90" cy="90" r="10" fill="url(#rmG2)"/>' +
+        '<circle cx="30" cy="140" r="12" fill="url(#rmG1)"/><circle cx="340" cy="60" r="16" fill="url(#rmG2)"/>' +
+        '<circle cx="300" cy="130" r="11" fill="url(#rmG3)"/><circle cx="355" cy="180" r="13" fill="url(#rmG1)"/>' +
+        '<circle cx="60" cy="220" r="10" fill="url(#rmG4)"/><circle cx="120" cy="30" r="9" fill="url(#rmG3)"/>' +
+        '<circle cx="250" cy="35" r="8" fill="url(#rmG2)"/><circle cx="330" cy="250" r="14" fill="url(#rmG1)"/>' +
+        '<circle cx="20" cy="270" r="9" fill="url(#rmG2)"/></g>' +
+        '<g transform="translate(252,30)">' +
+        '<line x1="0" y1="-30" x2="0" y2="0" stroke="#5a4522" stroke-width="2"/>' +
+        '<circle cx="0" cy="110" r="100" fill="url(#rmG1)" opacity=".5"/>' +
+        '<path d="M-8 0 C-8 -16 8 -16 8 0 C8 6 -8 6 -8 0z" fill="url(#rmBodyDk)"/>' +
+        '<path d="M-3 -16 L3 -16 L3 -26 Q0 -34 -3 -26 Z" fill="url(#rmBodyDk)"/>' +
+        '<circle cx="0" cy="-30" r="2.4" fill="#e9c468"/>' +
+        '<path d="M-26 10 h52 l-6 14 h-40z" fill="url(#rmBody)"/>' +
+        '<circle cx="-14" cy="17" r="2" fill="#6e4a18"/><circle cx="0" cy="17" r="2" fill="#6e4a18"/><circle cx="14" cy="17" r="2" fill="#6e4a18"/>' +
+        '<path d="M-30 24 h60 v64 a30 20 0 0 1 -60 0 z" fill="url(#rmBodyDk)"/>' +
+        '<path d="M-24 30 h16 v54 h-16z" fill="#b23a2e" opacity=".85"/>' +
+        '<path d="M8 30 h16 v54 h-16z" fill="#3a8f8a" opacity=".85"/>' +
+        '<path d="M-6 30 h12 v54 h-12z" fill="#2c1a10"/>' +
+        '<circle cx="0" cy="58" r="30" fill="url(#rmFlame)"/>' +
+        '<path d="M0 48c4 6 4 12 0 16c-4-4-4-10 0-16z" fill="#fff6cf"/>' +
+        '<g fill="#f6d98a" opacity=".8"><circle cx="-20" cy="36" r="1"/><circle cx="-12" cy="36" r="1"/><circle cx="12" cy="36" r="1"/><circle cx="20" cy="36" r="1"/>' +
+        '<circle cx="-20" cy="78" r="1"/><circle cx="-12" cy="78" r="1"/><circle cx="12" cy="78" r="1"/><circle cx="20" cy="78" r="1"/></g>' +
+        '<path d="M-34 88 h68 l-8 10 h-52z" fill="url(#rmBody)"/>' +
+        '<path d="M-10 98 v10 M10 98 v10" stroke="#9a6c22" stroke-width="2"/><circle cx="0" cy="112" r="3" fill="#e9c468"/></g>' +
+        '<path d="M44 18a13 13 0 1 0 9 22a10 10 0 1 1-9-22z" fill="#f6d98a" opacity=".9"/></svg>' +
+        '<div class="rm-content">' +
+        '<div class="rm-top">' + icon('crescent', 20, 2) + '<b class="tiro">রমজান পর্যন্ত বাকি</b></div>' +
+        '<div class="rm-cnt"><div class="rm-u"><b id="rmD">00</b><small>দিন</small></div><div class="rm-u"><b id="rmH">00</b><small>ঘণ্টা</small></div><div class="rm-u"><b id="rmM">00</b><small>মিনিট</small></div><div class="rm-u"><b id="rmS">00</b><small>সেকেন্ড</small></div></div>' +
+        '<div class="rm-dua"><p class="rm-ar" lang="ar" dir="rtl">اللَّهُمَّ بَارِكْ لَنَا فِي رَجَبَ وَشَعْبَانَ، وَبَلِّغْنَا رَمَضَانَ</p>' +
+        '<p class="rm-bn">— "হে আল্লাহ, রজব ও শাবান মাসে আমাদের বরকত দাও, এবং আমাদের রমজান পর্যন্ত পৌঁছে দাও।"</p></div>' +
+        '<p class="rm-note">আনুমানিক তারিখ, চাঁদ দেখার উপর নির্ভরশীল (১ দিন আগে-পরে হতে পারে)</p></div></section>';
 }
+function paintRamadanTick() {
+    const box = $('.ramadan-card'); if (!box) return;
+    const next = box.getAttribute('data-ramadan');
+    const ms = new Date(next + 'T00:00:00') - new Date();
+    if (ms <= 0) { renderTab('home'); return; }
+    const sec = Math.floor(ms / 1000);
+    const d = Math.floor(sec / 86400), h = Math.floor((sec % 86400) / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+    const set = (id, v) => { const e = $('#' + id); if (e) e.textContent = bn(pad2(v)); };
+    set('rmD', d); set('rmH', h); set('rmM', m); set('rmS', s);
+   }
 function habitsCardHTML() {
     const today = dkey();
     const rows = S.habits.map(h => {
