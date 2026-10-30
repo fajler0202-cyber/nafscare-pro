@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.web.nafscare_2c367.twa",
+    "sha256_cert_fingerprints": ["3F:6D:27:F9:18:58:DB:E1:35:DE:09:48:54:42:E7:DF:E4:EF:84:F3:A2:1C:BE:D8:D6:34:64:EE:C4:3F:6D:49"]
+  }
+}]
