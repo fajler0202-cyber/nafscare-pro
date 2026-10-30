@@ -153,7 +153,30 @@ svg.ic { flex: 0 0 auto; }
 .card.plain { box-shadow: none; }
 .card-h { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
 .card-h h2 { font-size: 21px; font-weight: 400; font-family: 'Tiro Bangla', serif; }
+/* ---------- কার্ড ডিজাইন আপগ্রেড ---------- */
+.card {
+    position: relative; overflow: hidden;
+    box-shadow: 0 2px 6px rgba(20,104,79,.07), 0 12px 28px rgba(20,104,79,.09);
+    background: linear-gradient(180deg, var(--surface) 0%, var(--raised) 140%);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+.card::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: var(--pat-img); opacity: calc(var(--pat-op) * .6);
+}
+.card:active { transform: scale(.985); box-shadow: 0 1px 4px rgba(20,104,79,.09); }
+.card.list::before, .card.list::after, .card.plain::before, .card.plain::after { display: none; }
 
+.st-ic {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft); color: var(--accent);
+}
+.st-ic.fl { background: rgba(233,162,27,.15); color: var(--accent2); }
 /* ---------- বোতাম ---------- */
 .btn {
     min-height: 48px; padding: 0 20px; border-radius: 24px; border: 1.5px solid transparent;
