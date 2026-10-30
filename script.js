@@ -757,7 +757,7 @@ function tick1() {
         if (curTab === 'home' || curTab === 'track') renderTab(curTab);
     }
     lastWaqtKey = k;
-    if (curTab === 'home') paintHeroTick(w);
+        if (curTab === 'home') { paintHeroTick(w); paintRamadanTick(); }
 }
 function tick30() {
     if (!S) return;
