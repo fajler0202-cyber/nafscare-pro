@@ -834,7 +834,6 @@ function animateRings(root) {
     });
 }
 function segHTML(items, active, act) {
-function segHTML(items, active, act) {
     return '<div class="seg" role="tablist" style="grid-template-columns:repeat(' + items.length + ',minmax(0,1fr))">' + items.map(i =>
         '<button type="button" role="tab" aria-selected="' + (i[0] === active) + '" class="' + (i[0] === active ? 'on' : '') + '" data-act="' + act + '" data-v="' + i[0] + '">' + i[1] + '</button>').join('') + '</div>';
 }
