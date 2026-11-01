@@ -564,3 +564,22 @@ body.has-player .toasts { bottom: calc(190px + env(safe-area-inset-bottom, 0px))
 .rm-ar { font-size: 18px; text-align: center; line-height: 2; color: #f6d98a; margin-bottom: 6px; }
 .rm-bn { font-size: 12.5px; color: #e3dac2; line-height: 1.6; text-align: center; }
 .rm-note { font-size: 10.5px; color: #cdbfa0; margin-top: 10px; text-align: center; display: block; }
+/* ---------- মোশন / এনিমেশন (ধাপ ১) ---------- */
+.tab.on { animation: tabFadeIn .3s cubic-bezier(.22,1,.36,1); }
+@keyframes tabFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+.btn, .iconbtn, .chip-b, .tg, .nav-b, .qk {
+    transition: transform .12s cubic-bezier(.4,0,.2,1);
+}
+.iconbtn:active:not(:disabled), .chip-b:active, .tg:active, .nav-b:active, .qk:active {
+    transform: scale(.94);
+}
+
+.bar i { transition: width .6s cubic-bezier(.22,1,.36,1); }
+
+.medal { transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+
+.tg-f.on .tg-box svg, .tg-qd .tg-box svg {
+    animation: checkPop .35s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes checkPop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
