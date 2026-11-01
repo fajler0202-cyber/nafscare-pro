@@ -296,7 +296,8 @@ function defaultState() {
         qada: { items: [], base: { fajr: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }, baseTs: 0 },
         tas: { sessions: [], cur: { k: 'subhanallah', n: 0, goal: 33, ts: 0 } },
         quran: { last: { s: 1, a: 1, ts: 0 }, marks: [], hifz: {}, rec: null, recTs: 0 },
-        habits: [],
+                habits: [],
+        cycle: { active: false, from: '', ranges: [] },
                 meta: { created: t, qadaFrom: t, lastSeen: today, lvl: 0, hSlotN: -1, pNotif: '' }
     };
 }
