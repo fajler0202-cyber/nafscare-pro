@@ -830,7 +830,9 @@ function animateRings(root) {
         c.style.transition = 'none';
         c.setAttribute('stroke-dashoffset', full);
         c.getBoundingClientRect();
-        requestAnimationFrame(() => { c.style.transition = ''; c.setAttribute('stroke-dashoffset', target); });
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => { c.style.transition = ''; c.setAttribute('stroke-dashoffset', target); });
+        });
     });
 }
 function segHTML(items, active, act) {
