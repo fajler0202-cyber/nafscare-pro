@@ -583,3 +583,13 @@ body.has-player .toasts { bottom: calc(190px + env(safe-area-inset-bottom, 0px))
     animation: checkPop .35s cubic-bezier(.34,1.56,.64,1);
 }
 @keyframes checkPop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+/* ---------- মোশন / এনিমেশন (ধাপ ২) ---------- */
+.tl-i.now .tl-dot { position: relative; }
+.tl-i.now .tl-dot::after {
+    content: ''; position: absolute; inset: -6px; border-radius: 50%;
+    border: 2px solid var(--accent2); animation: tlPulse 1.8s ease-out infinite;
+}
+@keyframes tlPulse { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.9); opacity: 0; } }
+
+.st-ic.fl { animation: flFlicker 2.6s ease-in-out infinite; }
+@keyframes flFlicker { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .75; transform: scale(1.08); } }
