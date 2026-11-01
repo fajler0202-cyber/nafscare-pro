@@ -824,6 +824,16 @@ function ringSVG(pct, size, sw, cls) {
     const r = (size - sw) / 2, c = 2 * Math.PI * r, h = size / 2;
     return '<svg class="ring ' + (cls || '') + '" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '" aria-hidden="true"><circle class="rg-t" cx="' + h + '" cy="' + h + '" r="' + r + '" fill="none" stroke-width="' + sw + '"/><circle class="rg-v" cx="' + h + '" cy="' + h + '" r="' + r + '" fill="none" stroke-width="' + sw + '" stroke-linecap="round" stroke-dasharray="' + c.toFixed(1) + '" stroke-dashoffset="' + (c * (1 - clamp(pct, 0, 100) / 100)).toFixed(1) + '" transform="rotate(-90 ' + h + ' ' + h + ')"/></svg>';
 }
+function animateRings(root) {
+    (root || document).querySelectorAll('.ring .rg-v').forEach(c => {
+        const target = c.getAttribute('stroke-dashoffset'), full = c.getAttribute('stroke-dasharray');
+        c.style.transition = 'none';
+        c.setAttribute('stroke-dashoffset', full);
+        c.getBoundingClientRect();
+        requestAnimationFrame(() => { c.style.transition = ''; c.setAttribute('stroke-dashoffset', target); });
+    });
+}
+function segHTML(items, active, act) {
 function segHTML(items, active, act) {
     return '<div class="seg" role="tablist" style="grid-template-columns:repeat(' + items.length + ',minmax(0,1fr))">' + items.map(i =>
         '<button type="button" role="tab" aria-selected="' + (i[0] === active) + '" class="' + (i[0] === active ? 'on' : '') + '" data-act="' + act + '" data-v="' + i[0] + '">' + i[1] + '</button>').join('') + '</div>';
