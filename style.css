@@ -239,7 +239,7 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
 .bar.sm { height: 5px; }
 .bar.full { height: 8px; }
 .ring .rg-t { stroke: var(--line); }
-.ring .rg-v { stroke: var(--accent2); transition: stroke-dashoffset 0.5s ease; }
+.ring .rg-v { stroke: var(--accent2); transition: stroke-dashoffset .9s cubic-bezier(.22,1,.36,1); }
 
 /* ---------- বার্তা-বক্স ---------- */
 .notice { display: flex; gap: 10px; align-items: center; padding: 12px 14px; border-radius: 16px; background: var(--raised); border: 1px solid var(--line); font-size: 13.5px; line-height: 1.55; justify-content: space-between; }
