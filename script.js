@@ -655,6 +655,11 @@ function removeAutoQada(k, pk) {
     S.qada.items = S.qada.items.filter(i => !(i.id === id && !i.done));
     return S.qada.items.length !== n;
 }
+function isPeriodDay(k) {
+    if (!S || !S.cycle) return false;
+    if (S.cycle.active && k >= S.cycle.from && k <= dkey()) return true;
+    return (S.cycle.ranges || []).some(r => k >= r.from && k <= r.to);
+}
 function qadaSweep(days) {
     if (!S.set.f.qada || !S) return false;
     const now = Date.now(), today = dkey();
