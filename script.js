@@ -665,8 +665,9 @@ function qadaSweep(days) {
     const now = Date.now(), today = dkey();
     days = days || [addDays(today, -1), today];
     let changed = false;
-    days.forEach(k => {
+            days.forEach(k => {
         if (k > today) return;
+        if (isPeriodDay(k)) { PR.forEach(p => { if (removeAutoQada(k, p.k)) changed = true; }); return; }
         const rec = S.days[k];
         PR.forEach(p => {
             const id = k + '_' + p.k;
