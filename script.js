@@ -1981,7 +1981,7 @@ function ramadanCountdownHTML() {
         '<circle cx="-20" cy="78" r="1"/><circle cx="-12" cy="78" r="1"/><circle cx="12" cy="78" r="1"/><circle cx="20" cy="78" r="1"/></g>' +
         '<path d="M-34 88 h68 l-8 10 h-52z" fill="url(#rmBody)"/>' +
         '<path d="M-10 98 v10 M10 98 v10" stroke="#9a6c22" stroke-width="2"/><circle cx="0" cy="112" r="3" fill="#e9c468"/></g>' +
-        '<path d="M44 18a13 13 0 1 0 9 22a10 10 0 1 1-9-22z" fill="#f6d98a" opacity=".9"/></svg>' +
+                '</svg>' +
         '<div class="rm-content">' +
         '<div class="rm-top">' + icon('crescent', 20, 2) + '<b class="tiro">রমজান পর্যন্ত বাকি</b></div>' +
         '<div class="rm-cnt"><div class="rm-u"><b id="rmD">00</b><small>দিন</small></div><div class="rm-u"><b id="rmH">00</b><small>ঘণ্টা</small></div><div class="rm-u"><b id="rmM">00</b><small>মিনিট</small></div><div class="rm-u"><b id="rmS">00</b><small>সেকেন্ড</small></div></div>' +
