@@ -2104,7 +2104,7 @@ ACT.sw = el => {
     const p = el.dataset.p, v = !getPath(S.set, p); setPath(S.set, p, v);
     if (p === 'f.qada' && v) { S.meta.qadaFrom = Date.now(); S.meta.lastSeen = dkey(); }
     setChanged();
-    if (v && p === 'n.prayer' || v && p === 'n.hadith') askNotif().then(r => { if (r === 'granted') { toast('নোটিফিকেশন চালু হয়েছে'); if (p === 'n.hadith') S.meta.hSlotN = hadithSlot(); } else if (r === 'unsupported') toast('এই পরিবেশে নোটিফিকেশন নেই, অ্যাপের ভেতরেই বার্তা দেখাবে'); else toast('অনুমতি পাওয়া যায়নি, অ্যাপের ভেতরেই বার্তা দেখাবে'); });
+        if (v && p === 'n.prayer' || v && p === 'n.hadith' || v && p === 'n.qada') askNotif().then(r => { if (r === 'granted') { toast('নোটিফিকেশন চালু হয়েছে'); if (p === 'n.hadith') S.meta.hSlotN = hadithSlot(); notify('NafsCare Pro', 'নোটিফিকেশন ঠিকমতো কাজ করছে ✓', 'test-notif', true); } else if (r === 'unsupported') toast('এই পরিবেশে নোটিফিকেশন নেই, অ্যাপের ভেতরেই বার্তা দেখাবে'); else toast('অনুমতি পাওয়া যায়নি, অ্যাপের ভেতরেই বার্তা দেখাবে'); });
 };
 ACT['theme-pick'] = el => {
     const k = el.dataset.t, t = THEMES[k];
