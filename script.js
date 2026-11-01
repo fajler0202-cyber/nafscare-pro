@@ -1001,6 +1001,18 @@ RENDER.track = function () {
     if (noteActive) { const n = $('#noteArea'); if (n) n.focus(); }
 };
 ACT.day = el => { const nk = addDays(trackDate, +el.dataset.d); if (nk <= dkey()) { trackDate = nk; refreshUI(); } };
+ACT['period-toggle'] = () => {
+    if (S.cycle.active) {
+        S.cycle.ranges.push({ from: S.cycle.from, to: dkey() });
+        S.cycle.active = false; S.cycle.from = '';
+        toast('পিরিয়ড শেষ হিসেবে চিহ্নিত হলো');
+    } else {
+        S.cycle.active = true; S.cycle.from = dkey();
+        toast('পিরিয়ড শুরু হিসেবে চিহ্নিত হলো, নামাজ মাফ থাকবে');
+    }
+    qadaSweep([dkey()]);
+    commit();
+};
 ACT['day-today'] = () => { trackDate = dkey(); refreshUI(); };
 
 /* ===== ১৮. রিপোর্ট ===== */
