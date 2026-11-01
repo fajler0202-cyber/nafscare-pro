@@ -990,8 +990,10 @@ RENDER.track = function () {
         '<button type="button" class="iconbtn" data-act="day" data-d="1" aria-label="পরের দিন"' + (k >= today ? ' disabled' : '') + '>' + icon('fwd', 20, 2.4) + '</button>' +
         (k !== today ? '<button type="button" class="btn sm primary" data-act="day-today">আজ</button>' : '') + '</div>' +
         '<section class="card raised score"><div class="sc-l"><span class="muted sm">নামাজের অর্জন</span><b class="tiro big">' + bn(pct) + '%</b></div><div class="sc-r muted sm">ফরজ <b>' + bn(f) + '/৫</b>' + (sunOn ? '<br>সুন্নত মুয়াক্কাদা <b>' + bn(s) + '/৪</b>' : '') + '</div><div class="bar full"><i style="width:' + pct + '%"></i></div></section>' +
-        (miss && S.set.f.qada ? '<div class="notice warn">' + icon('shield', 20, 2) + '<span>' + bn(miss) + ' ওয়াক্তের সময় শেষ হয়ে গেছে, তাই কাজা তালিকায় যোগ হয়েছে। সুযোগ পেলেই আদায় করে নিন।</span></div>' : '') +
-        '<div class="plist">' + PR.map(p => prayerCard(k, p, rec)).join('') + '</div>' +
+                (S.user.gender === 'female' ? '<button type="button" class="btn sm outline wide" data-act="period-toggle" style="margin-bottom:12px">' + icon('heart', 18, 2.2) + ' ' + (S.cycle.active ? 'পিরিয়ড শেষ করুন' : 'পিরিয়ড শুরু করুন') + '</button>' : '') +
+        (isPeriodDay(k) ? '<div class="notice">' + icon('heart', 20, 2) + '<span>এই দিনগুলোতে নামাজ মাফ থাকে, তাই কোনো কাজা যোগ হবে না।</span></div>' :
+            ((miss && S.set.f.qada ? '<div class="notice warn">' + icon('shield', 20, 2) + '<span>' + bn(miss) + ' ওয়াক্তের সময় শেষ হয়ে গেছে, তাই কাজা তালিকায় যোগ হয়েছে। সুযোগ পেলেই আদায় করে নিন।</span></div>' : '') +
+            '<div class="plist">' + PR.map(p => prayerCard(k, p, rec)).join('') + '</div>')) +
         '<section class="card" aria-label="অন্যান্য আমল"><div class="card-h"><h2 class="tiro">নফল আমল</h2></div>' +
         DEEDS.map(d => missionRow({ done: !!(rec.a && rec.a[d.k]), title: d.n, sub: d.sub, pts: P_DEED, pct: 0, attrs: 'data-act="deed" data-d="' + d.k + '" data-k="' + k + '"' })).join('') + '</section>' +
         (S.set.f.qada ? qadaCardHTML() : '') +
