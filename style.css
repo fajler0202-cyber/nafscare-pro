@@ -140,6 +140,7 @@ svg.ic { flex: 0 0 auto; }
 
 /* ---------- মাথার অংশ ---------- */
 .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 6px 4px 0; }
+.top::before { content: ''; width: 34px; height: 34px; border-radius: 10px; background: url('icon-512.png') center/cover; flex-shrink: 0; box-shadow: var(--shadow); }
 .top-l { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .top-r { display: flex; gap: 8px; }
 
