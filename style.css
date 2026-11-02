@@ -6,29 +6,29 @@
 
 /* ---------- থিমের রঙ ---------- */
 :root, :root[data-theme="fajr"] {
-    --bg-solid: #eef4f0;
-    --bg: linear-gradient(180deg, #eef4f0 0%, #e6efe9 100%);
-    --surface: #ffffff;
-    --raised: #f5faf6;
-    --line: rgba(16, 48, 42, 0.12);
-    --off: rgba(16, 48, 42, 0.28);
-    --text: #10302a;
-    --muted: #4d6962;
-    --accent: #14684f;
+    --bg-solid: #0c241f;
+    --bg: radial-gradient(140% 90% at 50% 0%, #163c33 0%, #0c241f 45%, #061612 100%);
+    --surface: rgba(255, 255, 255, 0.06);
+    --raised: rgba(255, 255, 255, 0.09);
+    --line: rgba(233, 196, 104, 0.18);
+    --off: rgba(246, 236, 205, 0.3);
+    --text: #f6eccd;
+    --muted: #9fb3ab;
+    --accent: #e9c468;
     --accent2: #e9a21b;
-    --accent-soft: rgba(20, 104, 79, 0.10);
-    --on-accent: #ffffff;
-    --nav: rgba(255, 255, 255, 0.97);
-    --warn-bg: #fdf3da;
+    --accent-soft: rgba(233, 196, 104, 0.12);
+    --on-accent: #10302a;
+    --nav: rgba(12, 36, 31, 0.96);
+    --warn-bg: rgba(233, 162, 27, 0.14);
     --warn-line: rgba(233, 162, 27, 0.5);
-    --warn-text: #5c4300;
-    --danger: #b3261e;
-    --shadow: 0 1px 2px rgba(16, 48, 42, 0.06), 0 8px 20px rgba(16, 48, 42, 0.05);
-    --shadow-up: 0 14px 32px rgba(16, 48, 42, 0.14);
-    --scrim: rgba(16, 48, 42, 0.45);
-    --pat-op: 0.07;
-    --pat-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%2314684f' stroke-width='1'%3E%3Cpath d='M32 6l6.5 19.5L58 32l-19.5 6.5L32 58l-6.5-19.5L6 32l19.5-6.5z'/%3E%3Ccircle cx='32' cy='32' r='4'/%3E%3C/g%3E%3C/svg%3E");
-    color-scheme: light;
+    --warn-text: #f6eccd;
+    --danger: #ff8a80;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.25);
+    --shadow-up: 0 14px 32px rgba(0, 0, 0, 0.45);
+    --scrim: rgba(3, 10, 8, 0.6);
+    --pat-op: 0.06;
+    --pat-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23e9c468' stroke-width='1'%3E%3Cpath d='M32 6l6.5 19.5L58 32l-19.5 6.5L32 58l-6.5-19.5L6 32l19.5-6.5z'/%3E%3Ccircle cx='32' cy='32' r='4'/%3E%3C/g%3E%3C/svg%3E");
+    color-scheme: dark;
 }
 :root[data-theme="isha"] {
     --bg-solid: #0c1124;
