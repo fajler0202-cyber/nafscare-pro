@@ -599,3 +599,78 @@ body.has-player .toasts { bottom: calc(190px + env(safe-area-inset-bottom, 0px))
 
 .st-ic.fl { animation: flFlicker 2.6s ease-in-out infinite; }
 @keyframes flFlicker { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .75; transform: scale(1.08); } }
+/* ---------- আইকন মাস্ক (থিম অনুযায়ী অটো-কালার) ---------- */
+.ic-m { display: inline-block; flex-shrink: 0; background-color: currentColor; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
+.ic-book { -webkit-mask-image: url('img-book.png'); mask-image: url('img-book.png'); }
+.ic-tasbeeh { -webkit-mask-image: url('img-tasbeeh.png'); mask-image: url('img-tasbeeh.png'); }
+.ic-mosque { -webkit-mask-image: url('img-mosque.png'); mask-image: url('img-mosque.png'); }
+.ic-chart { -webkit-mask-image: url('img-chart.png'); mask-image: url('img-chart.png'); }
+.ic-calendar { -webkit-mask-image: url('img-calendar.png'); mask-image: url('img-calendar.png'); }
+.ic-warning { -webkit-mask-image: url('img-warning.png'); mask-image: url('img-warning.png'); }
+
+/* ---------- হোম পেজ রিডিজাইন: হিরো + চিপ + লিস্ট (ধাপ ৩) ---------- */
+.nc-hero { position: relative; border-radius: 24px; overflow: hidden; padding: 20px 18px; margin-bottom: 18px; }
+:root[data-theme="fajr"] .nc-hero, :root .nc-hero { background: linear-gradient(160deg, #fbead0, #f3d2a8 60%, #e9b97e); }
+:root[data-theme="isha"] .nc-hero, :root[data-theme="maghrib"] .nc-hero { background: var(--surface); border: 1px solid var(--line); }
+.nc-hero .lbl { font-size: 11px; font-weight: 600; letter-spacing: .3px; }
+:root[data-theme="fajr"] .nc-hero .lbl, :root .nc-hero .lbl { color: #7a4e1c; }
+:root[data-theme="isha"] .nc-hero .lbl, :root[data-theme="maghrib"] .nc-hero .lbl { color: var(--muted); }
+.nc-hero .clock { font-size: 32px; font-weight: 800; margin-top: 4px; }
+:root[data-theme="fajr"] .nc-hero .clock, :root .nc-hero .clock { color: #4a2c0b; }
+:root[data-theme="isha"] .nc-hero .clock, :root[data-theme="maghrib"] .nc-hero .clock { color: var(--text); }
+.nc-hero .sub { font-size: 11.5px; margin-top: 3px; }
+:root[data-theme="fajr"] .nc-hero .sub, :root .nc-hero .sub { color: #8a5c24; }
+:root[data-theme="isha"] .nc-hero .sub, :root[data-theme="maghrib"] .nc-hero .sub { color: var(--muted); }
+
+.nc-ptrow { display: flex; gap: 8px; margin-top: 16px; }
+.nc-pcell { flex: 1; border-radius: 14px; padding: 8px 4px; text-align: center; }
+:root[data-theme="fajr"] .nc-pcell, :root .nc-pcell { background: rgba(255,255,255,.55); }
+:root[data-theme="isha"] .nc-pcell, :root[data-theme="maghrib"] .nc-pcell { background: var(--raised); }
+.nc-pcell b { display: block; font-size: 11px; }
+:root[data-theme="fajr"] .nc-pcell b, :root .nc-pcell b { color: #4a2c0b; }
+:root[data-theme="isha"] .nc-pcell b, :root[data-theme="maghrib"] .nc-pcell b { color: var(--text); }
+.nc-pcell span { font-size: 10px; }
+:root[data-theme="fajr"] .nc-pcell span, :root .nc-pcell span { color: #8a5c24; }
+:root[data-theme="isha"] .nc-pcell span, :root[data-theme="maghrib"] .nc-pcell span { color: var(--muted); }
+.nc-pcell.active { outline: 2px solid var(--accent); }
+
+.nc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 20px; }
+.nc-gi { text-align: center; }
+.nc-gi .chip { width: 52px; height: 52px; border-radius: 16px; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; }
+.nc-gi .chip .ic-m { width: 24px; height: 24px; }
+.nc-gi p { font-size: 10.5px; font-weight: 500; color: var(--text); }
+
+.nc-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 16px; margin-bottom: 16px; display: flex; gap: 13px; align-items: flex-start; }
+.nc-card .chip { width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nc-card .chip .ic-m { width: 21px; height: 21px; }
+.nc-card b { font-size: 12.5px; font-weight: 700; display: block; margin-bottom: 5px; color: var(--text); }
+.nc-card p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+.nc-card cite { display: block; margin-top: 6px; font-size: 10px; color: var(--muted); font-style: normal; }
+
+.nc-list { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 4px 14px; margin-bottom: 16px; }
+.nc-li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.nc-li:last-child { border-bottom: none; }
+.nc-li .chip { width: 38px; height: 38px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nc-li .chip .ic-m { width: 18px; height: 18px; }
+.nc-li .nm { flex: 1; }
+.nc-li .nm b { font-size: 13px; font-weight: 600; display: block; color: var(--text); }
+.nc-li .nm span { font-size: 10px; color: var(--muted); }
+.nc-chk { width: 22px; height: 22px; border-radius: 7px; border: 1.5px solid var(--line); flex-shrink: 0; }
+.nc-chk.on { background: linear-gradient(135deg, var(--accent), var(--accent2)); border: none; display: flex; align-items: center; justify-content: center; }
+.nc-chk.on::after { content: '✓'; color: var(--on-accent); font-size: 12px; font-weight: 800; }
+
+.nc-sech { display: flex; align-items: center; justify-content: space-between; margin: 6px 0 10px; }
+.nc-sech span { font-size: 14.5px; font-weight: 700; color: var(--text); }
+.nc-sech small { font-size: 11px; color: var(--muted); }
+
+.nc-ring { width: 150px; height: 150px; margin: 0 auto 14px; position: relative; }
+.nc-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.nc-ring .pct { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.nc-ring .pct b { font-size: 28px; font-weight: 800; color: var(--text); }
+.nc-ring .pct span { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+.nc-bars { display: flex; align-items: flex-end; gap: 8px; height: 80px; margin-bottom: 8px; }
+.nc-bars .b { flex: 1; border-radius: 6px 6px 2px 2px; background: var(--raised); }
+.nc-bars .b.on { background: linear-gradient(180deg, var(--accent), var(--accent2)); }
+.nc-barlabels { display: flex; gap: 8px; }
+.nc-barlabels span { flex: 1; text-align: center; font-size: 9.5px; color: var(--muted); }
