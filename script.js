@@ -918,7 +918,7 @@ RENDER.home = function () {
         '<div class="quick">' +
         (S.set.f.qada && pend > 0 ? '<button type="button" class="qk warn" data-act="go" data-tab="track">' + '<div class="chipbox sm c-orange"><span class="ic-m ic-warning"></span></div><span><b>কাজা বাকি ' + bn(pend) + ' ওয়াক্ত</b><small>আদায় করে নিন</small></span></button>' : '') +
         '<button type="button" class="qk" data-act="go" data-tab="quran"><div class="chipbox sm c-blue"><span class="ic-m ic-book"></span></div><span><b>চালিয়ে পড়ুন</b><small>সূরা ' + sur.bn + ', আয়াত ' + bn(last.a || 1) + '</small></span></button>' +
-                        '<button type="button" class="qk" data-act="go" data-tab="tasbeeh"><div class="bgimg"><img src="img-tasbih.jpg" alt=""></div>' + icon('beads', 20, 2) + '<span><b>তাসবিহ</b><small>আজ ' + bn((rec && rec.tas) || 0) + ' বার</small></span></button></div>';
+                        '<button type="button" class="qk" data-act="go" data-tab="tasbeeh"><div class="chipbox sm c-purple"><span class="ic-m ic-tasbeeh"></span></div><span><b>তাসবিহ</b><small>আজ ' + bn((rec && rec.tas) || 0) + ' বার</small></span></button></div>';
     animateRings(el);
 };
 ACT['copy-hadith'] = () => { const h = hadithNow(); copyText('“' + h.t + '”\n— ' + h.r + (h.rawi ? ' | বর্ণনাকারীঃ ' + h.rawi : '')); };
