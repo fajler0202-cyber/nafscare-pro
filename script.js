@@ -893,7 +893,7 @@ RENDER.home = function () {
         '<header class="top"><div class="top-l"><span class="muted sm">আসসালামু আলাইকুম</span><h1 class="tiro h1">' + esc(S.user.name) + ' ' + honorific() + '</h1>' +
         '<span class="muted sm">' + fmtDate(k, true) + '</span>' + (hij ? '<span class="muted xs">' + hij + '</span>' : '') + '</div>' +
         '<button type="button" class="iconbtn lg" data-act="go" data-tab="profile" aria-label="প্রোফাইল">' + icon(S.user.avatar || 'mosque', 24) + '</button></header>' +
-        heroHTML(w) +
+        heroHTML(w, k) +
         '<p class="next-line" id="nextLine">পরের নামাজ ' + w.next.n + ', ' + fmtClock(w.next.t) + ' (আর ' + fmtLeft(w.next.inSec) + ')</p>' +
         '<div class="notice warn" id="forbBox" role="alert"' + (w.forb && S.set.f.forbidden ? '' : ' hidden') + '>' + icon('alert', 20, 2) + '<span id="forbText">' + esc(w.forb || '') + '</span></div>' +
         timelineHTML(k, w) +
