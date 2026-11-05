@@ -857,20 +857,16 @@ function skyArt(sky) {
     if (sky === 'day') return '<circle cx="262" cy="100" r="50" fill="#fffbe0" opacity=".5"/><circle cx="262" cy="100" r="22" fill="#fff6c2"/><ellipse cx="90" cy="120" rx="44" ry="9" fill="#fff" opacity=".7"/><ellipse cx="128" cy="134" rx="28" ry="7" fill="#fff" opacity=".55"/><ellipse cx="300" cy="170" rx="34" ry="7" fill="#fff" opacity=".5"/>';
     return '<circle cx="96" cy="222" r="56" fill="#fff6d6" opacity=".5"/><circle cx="96" cy="222" r="22" fill="#fff4c9"/><ellipse cx="250" cy="120" rx="46" ry="9" fill="#fff" opacity=".55"/><ellipse cx="282" cy="132" rx="30" ry="7" fill="#fff" opacity=".45"/><ellipse cx="70" cy="140" rx="34" ry="7" fill="#fff" opacity=".45"/>';
 }
-function heroHTML(w) {
-    const arch = 'M0 420V200C0 110 70 50 179 4C288 50 358 110 358 200V420Z', inner = 'M10 420V204C10 120 76 62 179 18C282 62 348 120 348 204V420';
-    const sil = '<g style="fill:var(--sil)"><rect x="110" y="214" width="138" height="20"/><path d="M122 214C122 184 152 170 179 160C206 170 236 184 236 214z"/><rect x="177" y="146" width="4" height="14"/><circle cx="179" cy="143" r="4"/><rect x="78" y="168" width="12" height="66"/><path d="M76 168L84 146L92 168z"/><rect x="268" y="168" width="12" height="66"/><path d="M266 168L274 146L282 168z"/><rect x="0" y="232" width="358" height="12"/></g>';
-    return '<section class="hero" data-sky="' + w.sky + '" aria-label="চলমান ওয়াক্ত"><svg class="hero-svg" viewBox="0 0 358 420" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><defs>' +
-        '<linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sk1)"/><stop offset=".55" style="stop-color:var(--sk2)"/><stop offset="1" style="stop-color:var(--sk3)"/></linearGradient>' +
-        '<linearGradient id="fadeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--surface);stop-opacity:0"/><stop offset=".28" style="stop-color:var(--surface);stop-opacity:.96"/><stop offset="1" style="stop-color:var(--surface)"/></linearGradient>' +
-        '<clipPath id="archC"><path d="' + arch + '"/></clipPath></defs><g clip-path="url(#archC)"><rect width="358" height="420" style="fill:var(--surface)"/><rect width="358" height="244" fill="url(#skyG)"/>' + skyArt(w.sky) + sil + '<rect y="214" width="358" height="206" fill="url(#fadeG)"/></g>' +
-        '<path d="' + arch + '" fill="none" style="stroke:var(--accent)" stroke-width="1.6"/><path d="' + inner + '" fill="none" style="stroke:var(--accent)" stroke-opacity=".35"/></svg>' +
+function heroHTML(w, k) {
+    const T = timingsFor(k);
+    return '<section class="hero" data-sky="' + w.sky + '" aria-label="চলমান ওয়াক্ত"><div class="hero-ov"></div>' +
         '<div class="hero-in"><span class="muted sm" id="wqLabel">' + (w.key ? 'চলমান ওয়াক্ত' : 'এখন নামাজের ওয়াক্ত নেই') + '</span>' +
-        '<span class="tiro hero-name" id="wqName">' + w.name + '</span><span class="ar hero-ar" lang="ar">' + (w.ar || '&nbsp;') + '</span>' +
-        '<div class="hero-count"><b id="wqCount">' + fmtDur(w.left) + '</b><span class="muted sm" id="wqSuffix">' + (w.key ? 'শেষ হতে বাকি' : 'যোহর শুরু হতে বাকি') + '</span></div>' +
-        '<div class="bar"><i id="wqBar" style="width:' + (100 - w.pct).toFixed(1) + '%"></i></div>' +
+        '<span class="tiro hero-name" id="wqName">' + w.name + '</span>' + (w.ar ? '<span class="ar hero-ar" lang="ar">' + w.ar + '</span>' : '') +
+        '<div class="hero-count"><b id="wqCount">' + fmtDur(w.left) + '</b></div><span class="muted sm" id="wqSuffix">' + (w.key ? 'শেষ হতে বাকি' : 'যোহর শুরু হতে বাকি') + '</span>' +
         '<div class="hero-loc"><span class="loc-text">' + esc(locText()) + '</span><button type="button" class="link" data-act="loc-refresh">' + icon('refresh', 16, 2.2) + ' আপডেট</button></div>' +
-        '<span class="muted xs loc-note">' + locNote() + '</span></div></section>';
+        '<span class="muted xs loc-note">' + locNote() + '</span>' +
+        '<div class="hero-caps">' + PR.map(p => '<div class="hcap' + (w.key === p.k ? ' on' : '') + '"><b>' + p.n + '</b><span>' + fmtClock(T[p.tk]) + '</span></div>').join('') + '</div>' +
+        '</div></section>';
 }
 function paintHeroTick(w) {
     const c = $('#wqCount'); if (!c) return;
