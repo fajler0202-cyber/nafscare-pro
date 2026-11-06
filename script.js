@@ -882,10 +882,13 @@ function initHeroSlider() {
     if (!wrap) return;
     const track = $('#hsTrack'), dots = Array.from(wrap.querySelectorAll('.hs-dots span')), n = dots.length;
     hsIdx = 0;
-    function go(i) {
+        function go(i) {
         hsIdx = (i + n) % n;
         track.style.transform = 'translateX(-' + (hsIdx * 100) + '%)';
         dots.forEach((d, j) => d.classList.toggle('on', j === hsIdx));
+        Array.from(track.children).forEach((s, j) => s.classList.remove('active'));
+        void track.children[hsIdx].offsetWidth;
+        track.children[hsIdx].classList.add('active');
     }
     function restart() {
         if (hsTimer) clearInterval(hsTimer);
