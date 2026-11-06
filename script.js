@@ -868,6 +868,39 @@ function heroHTML(w, k) {
         '<div class="hero-caps">' + PR.map(p => '<div class="hcap' + (w.key === p.k ? ' on' : '') + '"><b>' + p.n + '</b><span>' + fmtClock(T[p.tk]) + '</span></div>').join('') + '</div>' +
         '</div></section>';
 }
+let hsTimer = null, hsIdx = 0;
+function sliderWrap(slides) {
+    slides = slides.filter(Boolean);
+    if (!slides.length) return '';
+    if (slides.length === 1) return '<div class="hero-wrap">' + slides[0] + '</div>';
+    return '<div class="hero-wrap" id="heroWrap"><div class="hs-track" id="hsTrack">' +
+        slides.map(s => '<div class="hs-slide">' + s + '</div>').join('') + '</div>' +
+        '<div class="hs-dots" id="hsDots">' + slides.map((_, i) => '<span' + (i === 0 ? ' class="on"' : '') + '></span>').join('') + '</div></div>';
+}
+function initHeroSlider() {
+    const wrap = $('#heroWrap'); if (hsTimer) { clearInterval(hsTimer); hsTimer = null; }
+    if (!wrap) return;
+    const track = $('#hsTrack'), dots = Array.from(wrap.querySelectorAll('.hs-dots span')), n = dots.length;
+    hsIdx = 0;
+    function go(i) {
+        hsIdx = (i + n) % n;
+        track.style.transform = 'translateX(-' + (hsIdx * 100) + '%)';
+        dots.forEach((d, j) => d.classList.toggle('on', j === hsIdx));
+    }
+    function restart() {
+        if (hsTimer) clearInterval(hsTimer);
+        hsTimer = setInterval(() => go(hsIdx + 1), 4500);
+    }
+    let sx = 0, dx = 0, dragging = false;
+    track.addEventListener('touchstart', e => { dragging = true; sx = e.touches[0].clientX; dx = 0; }, { passive: true });
+    track.addEventListener('touchmove', e => { if (!dragging) return; dx = e.touches[0].clientX - sx; }, { passive: true });
+    track.addEventListener('touchend', () => {
+        if (!dragging) return; dragging = false;
+        if (dx < -40) go(hsIdx + 1); else if (dx > 40) go(hsIdx - 1);
+        restart();
+    });
+    go(0); restart();
+}
 function paintHeroTick(w) {
     const c = $('#wqCount'); if (!c) return;
     c.textContent = fmtDur(w.left);
