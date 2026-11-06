@@ -328,6 +328,32 @@ body.has-player .toasts { bottom: calc(190px + env(safe-area-inset-bottom, 0px))
 .hs-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
 .hs-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: width .25s, background .25s; }
 .hs-dots span.on { width: 16px; border-radius: 3px; background: var(--accent); }
+.hero-wrap { position: relative; width: 100%; max-width: 358px; align-self: center; overflow: hidden; border-radius: 22px; height: 200px; }
+.hs-track { display: flex; height: 100%; transition: transform .5s cubic-bezier(.4,0,.2,1); }
+.hs-slide { flex: 0 0 100%; min-width: 0; height: 100%; display: flex; }
+.hs-slide .hero, .hs-slide .ramadan-card, .hs-slide .hadith, .hs-slide .stats3 { margin: 0; max-width: none; width: 100%; height: 100%; box-sizing: border-box; overflow: hidden; border-radius: 0; }
+.hs-slide .hero, .hs-slide .ramadan-card, .hs-slide .hadith { display: flex; flex-direction: column; justify-content: center; }
+.hs-slide .stats3 { align-content: center; }
+.hs-slide .hadith, .hs-slide .stats3 { background: linear-gradient(145deg, #1c3a52, #0a1726); border-color: rgba(255,255,255,.12); color: #fff; }
+.hs-slide .hadith .muted, .hs-slide .stats3 .muted { color: rgba(255,255,255,.72) !important; }
+.hs-slide .hadith::after { background-image: none; background-color: rgba(255,255,255,.1); -webkit-mask-image: url('img-book.png'); mask-image: url('img-book.png'); -webkit-mask-size: 150px; mask-size: 150px; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: right -20px bottom -18px; mask-position: right -20px bottom -18px; opacity: 1; }
+.hs-slide .stats3::after { background-image: none; background-color: rgba(255,255,255,.1); -webkit-mask-image: url('img-chart.png'); mask-image: url('img-chart.png'); -webkit-mask-size: 150px; mask-size: 150px; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: right -20px bottom -18px; mask-position: right -20px bottom -18px; opacity: 1; }
+.hs-slide .hero { padding: 16px 18px; }
+.hs-slide .hero .hero-name { font-size: 18px; }
+.hs-slide .hero .hero-count b { font-size: 26px; }
+.hs-slide .hero .hero-ar, .hs-slide .hero .hero-caps, .hs-slide .hero .loc-note { display: none; }
+.hs-slide .hero .hero-loc { margin-top: 8px; }
+.hs-slide .ramadan-card { padding: 16px 18px; }
+.hs-slide .ramadan-card .rm-dua, .hs-slide .ramadan-card .rm-note { display: none; }
+.hs-slide .hadith { padding: 16px 18px; }
+.hs-slide .hadith .orn, .hs-slide .hadith .hd-exp, .hs-slide .hadith .hd-next, .hs-slide .hadith p.muted.xs { display: none; }
+.hs-slide .hadith .hd-text { font-size: 13.5px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.hs-slide .stats3 { padding: 14px 8px; }
+.hs-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.hs-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: width .25s, background .25s; }
+.hs-dots span.on { width: 16px; border-radius: 3px; background: var(--accent); }
+@keyframes hsIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.hs-slide.active > * { animation: hsIn .5s ease .12s both; }
 .next-line { text-align: center; font-size: 14px; color: var(--muted); margin-top: -4px; }
 .timeline { position: relative; display: flex; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 16px 8px 12px; box-shadow: var(--shadow); }
 .tl-line { position: absolute; left: 10%; right: 10%; top: 23px; height: 2px; background: var(--line); }
