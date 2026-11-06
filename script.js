@@ -926,7 +926,20 @@ RENDER.home = function () {
         '<header class="top"><div class="top-l"><span class="muted sm">আসসালামু আলাইকুম</span><h1 class="tiro h1">' + esc(S.user.name) + ' ' + honorific() + '</h1>' +
         '<span class="muted sm">' + fmtDate(k, true) + '</span>' + (hij ? '<span class="muted xs">' + hij + '</span>' : '') + '</div>' +
         '<button type="button" class="iconbtn lg" data-act="go" data-tab="profile" aria-label="প্রোফাইল">' + icon(S.user.avatar || 'mosque', 24) + '</button></header>' +
-        heroHTML(w, k) +
+                sliderWrap([
+            heroHTML(w, k),
+            S.set.f.ramadan ? ramadanCountdownHTML() : '',
+            S.set.f.hadith ? '<article class="card hadith" id="hadithBoxS" data-slot="' + sl + '"><div class="orn"><span></span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg><span></span></div>' +
+                '<div class="hd-top"><div class="chipbox sm c-blue"><span class="ic-m ic-book"></span></div><b class="tiro">হাদিস</b><small class="muted">ভাবার্থ</small></div><p class="hd-text tiro">' + esc(h.t) + '</p>' +
+                         (h.rawi ? '<p class="muted xs">বর্ণনাকারীঃ ' + esc(h.rawi) + '</p>' : '') +
+                (h.exp ? '<p class="muted sm hd-exp">' + esc(h.exp) + '</p>' : '') +
+                '<div class="hd-foot"><span class="muted sm">' + esc(h.r) + '</span></div>' +
+                '<p class="muted xs hd-next">পরের হাদিস আসবে ' + hadithNextAt() + '-এ</p></article>' : '',
+            '<section class="card stats3" aria-label="আজকের অগ্রগতি">' +
+            '<div class="st"><span class="st-ic fl">' + icon('flame', 22, 2) + '</span><b class="tiro">' + bn(st) + '</b><small>দিনের স্ট্রেইক</small></div>' +
+            '<div class="st ringst">' + ringSVG(sc, 58, 6, 'gold') + '<b class="tiro rg-n">' + bn(sc) + '%</b><small>আজকের স্কোর</small></div>' +
+            '<button type="button" class="st lvst" data-act="go" data-tab="profile" aria-label="লেভেল ও ব্যাজ দেখুন"><span class="mini-medal">' + medal(bl, 'current', 'h') + '</span><b class="tiro">লেভেল ' + bn(bl + 1) + '</b><small>' + LEVELS[bl][0] + '</small></button></section>'
+        ]) +
         '<p class="next-line" id="nextLine">পরের নামাজ ' + w.next.n + ', ' + fmtClock(w.next.t) + ' (আর ' + fmtLeft(w.next.inSec) + ')</p>' +
         '<div class="notice warn" id="forbBox" role="alert"' + (w.forb && S.set.f.forbidden ? '' : ' hidden') + '>' + icon('alert', 20, 2) + '<span id="forbText">' + esc(w.forb || '') + '</span></div>' +
         timelineHTML(k, w) +
