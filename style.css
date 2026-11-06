@@ -317,6 +317,17 @@ body.has-player .toasts { bottom: calc(190px + env(safe-area-inset-bottom, 0px))
 .hcap span { display: block; font-size: 10.5px; color: rgba(255,255,255,.8); }
 .hcap.on { background: rgba(255,255,255,.95); }
 .hcap.on b, .hcap.on span { color: #3a2350; }
+.hero-wrap { position: relative; width: 100%; max-width: 358px; align-self: center; overflow: hidden; border-radius: 24px; }
+.hs-track { display: flex; transition: transform .45s cubic-bezier(.4,0,.2,1); }
+.hs-slide { flex: 0 0 100%; min-width: 0; }
+.hs-slide .hero, .hs-slide .ramadan-card, .hs-slide .hadith, .hs-slide .stats3 { margin: 0; max-width: none; width: 100%; }
+.hs-slide .hadith, .hs-slide .stats3 { background: linear-gradient(145deg, #1c3a52, #0a1726); border-color: rgba(255,255,255,.12); color: #fff; }
+.hs-slide .hadith .muted, .hs-slide .stats3 .muted { color: rgba(255,255,255,.72) !important; }
+.hs-slide .hadith::after { background-image: none; background-color: rgba(255,255,255,.1); -webkit-mask-image: url('img-book.png'); mask-image: url('img-book.png'); -webkit-mask-size: 170px; mask-size: 170px; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: right -24px bottom -22px; mask-position: right -24px bottom -22px; opacity: 1; }
+.hs-slide .stats3::after { background-image: none; background-color: rgba(255,255,255,.1); -webkit-mask-image: url('img-chart.png'); mask-image: url('img-chart.png'); -webkit-mask-size: 170px; mask-size: 170px; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: right -24px bottom -22px; mask-position: right -24px bottom -22px; opacity: 1; }
+.hs-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.hs-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: width .25s, background .25s; }
+.hs-dots span.on { width: 16px; border-radius: 3px; background: var(--accent); }
 .next-line { text-align: center; font-size: 14px; color: var(--muted); margin-top: -4px; }
 .timeline { position: relative; display: flex; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 16px 8px 12px; box-shadow: var(--shadow); }
 .tl-line { position: absolute; left: 10%; right: 10%; top: 23px; height: 2px; background: var(--line); }
