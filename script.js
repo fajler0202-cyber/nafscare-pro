@@ -1717,7 +1717,7 @@ function readerHTML() {
     if (!t) return head + '<div class="card center"><div class="spin" aria-hidden="true"></div><p class="muted">সূরা আসছে…</p></div>';
     const data = Q.tafsir[s];
     if (!data) {
-        const body = Q.tfState === 'fail' ? '<div class="card center"><p>তাফসীর আনা যায়নি। ইন্টারনেট সংযোগ চেক করুন।</p><button type="button" class="btn primary" data-act="tafsir-retry">আবার চেষ্টা করুন</button></div>'
+                const body = Q.tfState === 'fail' ? '<div class="card center"><p>তাফসীর আনা যায়নি। ইন্টারনেট সংযোগ চেক করুন।</p><p class="muted xs" style="word-break:break-all">' + esc(Q.tfErr || '') + '</p><button type="button" class="btn primary" data-act="tafsir-retry">আবার চেষ্টা করুন</button></div>'
             : '<div class="card center"><div class="spin" aria-hidden="true"></div><p class="muted">তাফসীর আসছে…</p></div>';
         return head + body;
     }
