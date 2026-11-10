@@ -1731,11 +1731,7 @@ function readerHTML() {
             (notes.length ? '<div class="tf-notes">' + notes.map(nt => '<p class="tf-note" id="fn-' + s + '-' + a + '-' + nt.n + '"><b>[' + nt.n + ']</b> ' + esc(nt.text) + '</p>').join('') + '</div>' : '') +
             '</article>');
     }
-    return head + '<div class="alist">' + out.join('') + '</div>';
-}
-    return head + '<div class="alist">' + out.join('') + '</div>';
-}
-RENDER.quran = function () {
+            if (!Q.tafsir[Q.s] && Q.tfState !== 'loading' && Q.tfState !== 'fail') ensureTafsir();
     const el = $('#tab-quran');
     el.innerHTML = '<header class="top"><div class="top-l"><span class="muted sm">কুরআন</span><h1 class="tiro h1">শুনুন, পড়ুন, বুঝুন</h1></div></header>' +
         segHTML([['listen', 'শুনুন'], ['read', 'পড়ুন'], ['tafsir', 'তাফসীর']], Q.mode, 'qmode') +
