@@ -1730,8 +1730,10 @@ function readerHTML() {
             '<p class="ay-tr tf-tr">' + (trRaw ? linkifyFootnoteMarkers(trRaw, s, a).replace(/\n/g, '<br>') : 'এই আয়াতের অনুবাদ পাওয়া যায়নি।') + '</p>' +
             (notes.length ? '<div class="tf-notes">' + notes.map(nt => '<p class="tf-note" id="fn-' + s + '-' + a + '-' + nt.n + '"><b>[' + nt.n + ']</b> ' + esc(nt.text) + '</p>').join('') + '</div>' : '') +
             '</article>');
-    }
-            if (!Q.tafsir[Q.s] && Q.tfState !== 'loading' && Q.tfState !== 'fail') ensureTafsir();
+       }
+    return head + '<div class="alist">' + out.join('') + '</div>';
+}
+RENDER.quran = function () {
     const el = $('#tab-quran');
     el.innerHTML = '<header class="top"><div class="top-l"><span class="muted sm">কুরআন</span><h1 class="tiro h1">শুনুন, পড়ুন, বুঝুন</h1></div></header>' +
         segHTML([['listen', 'শুনুন'], ['read', 'পড়ুন'], ['tafsir', 'তাফসীর']], Q.mode, 'qmode') +
@@ -1739,7 +1741,7 @@ function readerHTML() {
     if (Q.mode === 'listen') { if (Q.recsState === 'idle') loadReciters(); }
     else if (Q.mode === 'tafsir') {
         if (!Q.text[Q.s] && Q.tState !== 'loading' && Q.tState !== 'fail') ensureText();
-                if (!Q.tafsir[Q.s] && Q.tfState !== 'loading' && Q.tfState !== 'fail') ensureTafsir();
+        if (!Q.tafsir[Q.s] && Q.tfState !== 'loading' && Q.tfState !== 'fail') ensureTafsir();
     }
     else if (!Q.text[Q.s] && Q.tState !== 'loading' && Q.tState !== 'fail') ensureText();
     markPlaying(false);
