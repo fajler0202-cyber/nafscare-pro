@@ -1421,7 +1421,7 @@ async function ensureTafsir() {
     const n = Q.s;
     if (Q.tafsir[n]) { Q.tfState = ''; return; }
     Q.tfState = 'loading';
-    try { await loadFootnoteTafsir(n); Q.tfState = ''; } catch (e) { Q.tfState = 'fail'; }
+        try { await loadFootnoteTafsir(n); Q.tfState = ''; } catch (e) { Q.tfState = 'fail'; Q.tfErr = (e && e.message) || String(e); }
     if (curTab === 'quran' && Q.mode === 'tafsir' && Q.s === n) renderTab('quran');
 }
 async function downloadAllSurahs(onProg) {
