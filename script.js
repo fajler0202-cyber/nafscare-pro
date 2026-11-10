@@ -1376,56 +1376,52 @@ async function ensureText() {
     Q.tState = 'loading';
     try { await loadSurah(n); Q.tState = ''; } catch (e) { Q.tState = 'fail'; }
     if (curTab === 'quran' && Q.mode !== 'listen' && Q.s === n) renderTab('quran');
-} /* ---- তাফসীর (ব্যাখ্যা): api.islamic.app থেকে, একবার নামলে অফলাইনেও থাকে ---- */
-const TAFSIRS = [
-    ['bn-tafsir-abu-bakr-zakaria', 'আবু বকর যাকারিয়া'],
-    ['bn-tafsir-ahsanul-bayaan', 'আহসানুল বায়ান'],
-    ['bn-tafseer-ibn-e-kaseer', 'ইবনে কাসীর'],
-    ['tafisr-fathul-majid-bn', 'ফাতহুল মাজীদ']
-];
-function stripTafsirHTML(html) {
-    let s = String(html || '');
-    s = s.replace(/<\/(p|div)\s*>/gi, '\n\n').replace(/<br\s*\/?>/gi, '\n');
-    s = s.replace(/<[^>]+>/g, '');
-    s = s.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-    return s.replace(/\n{3,}/g, '\n\n').trim();
+} /* ---- তাফসীর/টীকা: QuranEnc.com (ড. আবু বকর মুহাম্মদ যাকারিয়া), একবার নামলে অফলাইনেও থাকে ---- */
+async function fetchJSONRetry(url, ms, tries) {
+    let err;
+    for (let i = 0; i < tries; i++) {
+        try { return await fetchJSON(url, ms); }
+        catch (e) { err = e; if (i < tries - 1) await new Promise(r => setTimeout(r, 1000 * (i + 1))); }
+    }
+    throw err;
 }
-function tafsirTextOf(v) {
-    if (v.tafsirs && v.tafsirs.length) return v.tafsirs[0].text || '';
-    if (v.text) return v.text;
-    return '';
+function parseFootnotes(raw) {
+    if (Array.isArray(raw)) {
+        return raw.map((x, i) => ({ n: bn(i + 1), text: String((x && (x.text || x.note)) || x || '').trim() })).filter(x => x.text);
+    }
+    const s = String(raw == null ? '' : raw).trim();
+    if (!s) return [];
+    const parts = s.split(/(?=\[[০-৯]+\])/g).map(x => x.trim()).filter(Boolean);
+    return parts.map(p => {
+        const m = p.match(/^\[([০-৯]+)\]\s*([\s\S]*)$/);
+        return m ? { n: m[1], text: m[2].trim() } : { n: '', text: p };
+    });
 }
-function ayahNumOf(v, i) {
-    if (v.verse_number) return v.verse_number;
-    if (v.numberInSurah) return v.numberInSurah;
-    if (v.verse_key) { const p = String(v.verse_key).split(':'); if (p[1]) return +p[1]; }
-    return i + 1;
+function linkifyFootnoteMarkers(text, s, a) {
+    return esc(text).replace(/\[([০-৯]+)\]/g, (m, num) => '<a href="#fn-' + s + '-' + a + '-' + num + '" class="fn-mark">[' + num + ']</a>');
 }
-async function loadTafsir(n, tid) {
-    const key = n + ':' + tid;
-    if (Q.tafsir[key]) return Q.tafsir[key];
-    const ck = 'taf' + n + '_' + tid;
+async function loadFootnoteTafsir(n) {
+    if (Q.tafsir[n]) return Q.tafsir[n];
+    const ck = 'fnt' + n;
     const c = await IDB.get(ck);
-    if (c && c.length) { Q.tafsir[key] = c; return c; }
-    const arr = [];
-    let page = 1, pages = 1;
-    do {
-        const j = await fetchJSON('https://api.islamic.app/v1/verses/by_chapter/' + n + '?tafsirs=' + tid + '&per_page=50&page=' + page, 22000);
-        const d = (j && j.data) || {};
-        const verses = d.verses || [];
-        verses.forEach((v, i) => { arr[ayahNumOf(v, i) - 1] = stripTafsirHTML(tafsirTextOf(v)); });
-        pages = (d.pagination && d.pagination.pages) || 1;
-        page++;
-    } while (page <= pages);
-    if (!arr.length) throw new Error('empty');
-    Q.tafsir[key] = arr; IDB.set(ck, arr);
-    return arr;
+    if (c && c.tr && c.tr.length) { Q.tafsir[n] = c; return c; }
+    const j = await fetchJSONRetry('https://quranenc.com/api/v1/translation/sura/bengali_zakaria/' + n, 20000, 3);
+    if (!Array.isArray(j) || !j.length) throw new Error('empty');
+    const tr = [], fn = [];
+    j.forEach((row, i) => {
+        const a = (row && row.aya) ? (+row.aya) : (i + 1);
+        tr[a - 1] = String((row && row.translation) || '');
+        fn[a - 1] = (row && row.footnotes != null) ? row.footnotes : '';
+    });
+    const data = { tr: tr, fn: fn };
+    Q.tafsir[n] = data; IDB.set(ck, data);
+    return data;
 }
 async function ensureTafsir() {
-    const n = Q.s, tid = S.set.tafsirId, key = n + ':' + tid;
-    if (Q.tafsir[key]) { Q.tfState = ''; return; }
+    const n = Q.s;
+    if (Q.tafsir[n]) { Q.tfState = ''; return; }
     Q.tfState = 'loading';
-    try { await loadTafsir(n, tid); Q.tfState = ''; } catch (e) { Q.tfState = 'fail'; }
+    try { await loadFootnoteTafsir(n); Q.tfState = ''; } catch (e) { Q.tfState = 'fail'; }
     if (curTab === 'quran' && Q.mode === 'tafsir' && Q.s === n) renderTab('quran');
 }
 async function downloadAllSurahs(onProg) {
