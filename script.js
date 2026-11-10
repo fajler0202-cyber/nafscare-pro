@@ -1739,7 +1739,7 @@ function readerHTML() {
     if (Q.mode === 'listen') { if (Q.recsState === 'idle') loadReciters(); }
     else if (Q.mode === 'tafsir') {
         if (!Q.text[Q.s] && Q.tState !== 'loading' && Q.tState !== 'fail') ensureText();
-        if (!Q.tafsir[Q.s + ':' + S.set.tafsirId] && Q.tfState !== 'loading' && Q.tfState !== 'fail') ensureTafsir();
+                if (!Q.tafsir[Q.s] && Q.tfState !== 'loading' && Q.tfState !== 'fail') ensureTafsir();
     }
     else if (!Q.text[Q.s] && Q.tState !== 'loading' && Q.tState !== 'fail') ensureText();
     markPlaying(false);
