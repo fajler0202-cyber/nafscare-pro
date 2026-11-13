@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NafsCare Pro – ডাউনলোড করুন</title>
+<meta name="description" content="NafsCare Pro (FajleVerse) — নামাজ, কুরআন, তাসবিহ ও আত্ম-মূল্যায়নের একটি ইসলামিক অ্যাপ। এখনই APK ডাউনলোড করুন।">
+<meta property="og:title" content="NafsCare Pro – FajleVerse">
+<meta property="og:description" content="নামাজ ট্র্যাকার, কুরআন (তিলাওয়াত+তাফসীর), হাদিস, তাসবিহ ও রমজান কাউন্টডাউন — সব এক অ্যাপে। এখনই ডাউনলোড করুন।">
+<meta property="og:image" content="icon-512.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="download.css">
+</head>
+<body>
+
+<div class="dl-bg" aria-hidden="true"></div>
+
+<header class="dl-hero">
+  <img src="icon-512.png" alt="NafsCare Pro লোগো" class="dl-logo">
+  <h1 class="tiro">NafsCare Pro</h1>
+  <p class="dl-sub">FajleVerse · আত্ম-মূল্যায়নের মাধ্যমে ইবাদতের পথে</p>
+  <p class="dl-tag">নামাজ, কুরআন, হাদিস, তাসবিহ আর রমজান — সব একসাথে, একটি অ্যাপে।</p>
+
+  <div class="dl-btns">
+    <a class="btn primary" href="nafscare.apk" download>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+      APK ডাউনলোড করুন
+    </a>
+    <a class="btn ghost" href="https://nafscare-2c367.web.app" target="_blank" rel="noopener">
+      ব্রাউজারে ব্যবহার করুন
+    </a>
+  </div>
+  <p class="dl-meta">Android · ফ্রি · ইন্টারনেট ছাড়াও ব্যবহারযোগ্য</p>
+</header>
+
+<main>
+
+  <section class="feats">
+    <h2 class="tiro">যা যা আছে অ্যাপে</h2>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-ic c1">🕌</div><b>নামাজ ট্র্যাকার</b><p>ফরজ ও সুন্নত নামাজ ট্র্যাক করুন, কাজা নামাজের হিসাব রাখুন।</p></div>
+      <div class="feat"><div class="feat-ic c2">📖</div><b>কুরআন</b><p>তিলাওয়াত শুনুন, পড়ুন এবং আয়াতের টীকাসহ অর্থ বুঝুন।</p></div>
+      <div class="feat"><div class="feat-ic c3">💬</div><b>হাদিস</b><p>প্রতিদিন নতুন নতুন হাদিস, বর্ণনাকারী ও সংক্ষিপ্ত ব্যাখ্যাসহ।</p></div>
+      <div class="feat"><div class="feat-ic c4">📿</div><b>তাসবিহ</b><p>ডিজিটাল তাসবিহ কাউন্টার, ইতিহাস ও পরিসংখ্যানসহ।</p></div>
+      <div class="feat"><div class="feat-ic c5">🌙</div><b>রমজান কাউন্টডাউন</b><p>রমজান পর্যন্ত কত দিন বাকি তা দেখুন এক নজরে।</p></div>
+      <div class="feat"><div class="feat-ic c6">🏅</div><b>লেভেল ও ব্যাজ</b><p>নিয়মিত আমলে পয়েন্ট জমিয়ে লেভেল আপ করুন।</p></div>
+    </div>
+  </section>
+
+  <section class="steps">
+    <h2 class="tiro">যেভাবে ইনস্টল করবেন</h2>
+    <ol>
+      <li><b>APK ডাউনলোড করুন</b> — উপরের বাটনে চাপুন।</li>
+      <li><b>আনলক করুন</b> — ডাউনলোড হওয়া ফাইলে ট্যাপ করলে "অজানা উৎস থেকে অ্যাপ ইনস্টল" অনুমতি চাইতে পারে — "অনুমতি দিন" / "Allow" চাপুন।</li>
+      <li><b>ইনস্টল করুন</b> — "Install" চাপুন, কয়েক সেকেন্ডে শেষ হয়ে যাবে।</li>
+      <li><b>চালু করুন</b> — "Open" চাপুন অথবা হোম স্ক্রিন থেকে NafsCare Pro আইকনে ট্যাপ করুন।</li>
+    </ol>
+    <p class="note">নিরাপত্তা নোট: এই APK প্লে স্টোরের বাইরে থেকে ইনস্টল হয় বলে ফোন একটা সতর্কবার্তা দেখাতে পারে — এটা স্বাভাবিক, "অজানা উৎস" (Unknown sources) থেকে ইনস্টলের ক্ষেত্রে অ্যান্ড্রয়েড এভাবেই সতর্ক করে।</p>
+  </section>
+
+</main>
+
+<footer class="dl-foot">
+  <p>NafsCare Pro · FajleVerse</p>
+</footer>
+
+</body>
+</html>
