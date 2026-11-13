@@ -2050,7 +2050,7 @@ function ramadanCountdownHTML() {
                 '</svg>' +
         '<div class="rm-content">' +
         '<div class="rm-top">' + icon('crescent', 20, 2) + '<b class="tiro">রমজান পর্যন্ত বাকি</b></div>' +
-        '<div class="rm-cnt"><div class="rm-u"><b id="rmD">00</b><small>দিন</small></div><div class="rm-u"><b id="rmH">00</b><small>ঘণ্টা</small></div><div class="rm-u"><b id="rmM">00</b><small>মিনিট</small></div><div class="rm-u"><b id="rmS">00</b><small>সেকেন্ড</small></div></div>' +
+                '<div class="rm-cnt"><div class="rm-u"><b class="rm-d">00</b><small>দিন</small></div><div class="rm-u"><b class="rm-h">00</b><small>ঘণ্টা</small></div><div class="rm-u"><b class="rm-m">00</b><small>মিনিট</small></div><div class="rm-u"><b class="rm-s">00</b><small>সেকেন্ড</small></div></div>' +
         '<div class="rm-dua"><p class="rm-ar" lang="ar" dir="rtl">اللَّهُمَّ بَارِكْ لَنَا فِي رَجَبَ وَشَعْبَانَ، وَبَلِّغْنَا رَمَضَانَ</p>' +
         '<p class="rm-bn">— "হে আল্লাহ, রজব ও শাবান মাসে আমাদের বরকত দাও, এবং আমাদের রমজান পর্যন্ত পৌঁছে দাও।"</p></div>' +
         '<p class="rm-note">আনুমানিক তারিখ, চাঁদ দেখার উপর নির্ভরশীল (১ দিন আগে-পরে হতে পারে)</p></div></section>';
