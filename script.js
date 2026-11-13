@@ -1423,7 +1423,7 @@ async function ensureTafsir() {
     if (Q.tafsir[n]) { Q.tfState = ''; return; }
     Q.tfState = 'loading';
         try { await loadFootnoteTafsir(n); Q.tfState = ''; } catch (e) { Q.tfState = 'fail'; Q.tfErr = (e && e.message) || String(e); }
-    if (curTab === 'quran' && Q.mode === 'tafsir' && Q.s === n) renderTab('quran');
+        if (curTab === 'quran' && Q.s === n) renderTab('quran');
 }
 async function downloadAllSurahs(onProg) {
     let done = 0, fail = 0, i = 1;
