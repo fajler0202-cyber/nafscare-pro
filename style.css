@@ -522,6 +522,7 @@ body.has-player .toasts { bottom: calc(190px + env(safe-area-inset-bottom, 0px))
 .blur { filter: blur(9px); -webkit-user-select: none; user-select: none; pointer-events: none; }
 .reveal-b { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); height: 46px; padding: 0 20px; border-radius: 23px; border: 0; background: var(--accent); color: var(--on-accent); font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
 .ay-tr { font-size: 15px; line-height: 1.85; }
+.ay-note-b { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; margin-inline-start: 4px; border: none; padding: 0; vertical-align: -3px; border-radius: 50%; background: var(--raised); color: var(--accent); cursor: pointer; }
 .tf-src { margin: -4px 0 10px; }
 .fn-mark { color: var(--accent); font-weight: 700; text-decoration: none; padding: 0 1px; }
 .tf-notes { margin-top: 10px; padding: 10px 12px; border-radius: 14px; background: var(--raised); display: flex; flex-direction: column; gap: 8px; }
