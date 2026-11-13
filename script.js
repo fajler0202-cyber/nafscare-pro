@@ -1689,8 +1689,9 @@ function readerHTML() {
     if (!t) {
         body = Q.tState === 'fail' ? '<div class="card center"><p>সূরার লেখা আনা যায়নি। প্রথমবার পড়তে ইন্টারনেট লাগে, এরপর অফলাইনেও থাকে।</p><button type="button" class="btn primary" data-act="q-retry">আবার চেষ্টা করুন</button></div>'
             : '<div class="card center"><div class="spin" aria-hidden="true"></div><p class="muted">সূরা আসছে…</p></div>';
-        return head + body;
+                return head + body;
     }
+    if (!Q.tafsir[s] && Q.tfState !== 'loading' && Q.tfState !== 'fail') ensureTafsir();
     if (hifz) {
         const h = Q.hifz, done = (S.quran.hifz[s] || []).length;
         head += '<section class="card hifz"><div class="card-h"><h2 class="tiro">হিফজ মোড</h2><span class="chip gold">মুখস্থ ' + bn(done) + '/' + bn(sur.v) + '</span></div>' +
