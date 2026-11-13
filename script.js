@@ -1667,13 +1667,15 @@ function ayahCard(s, a, t, hifz) {
     const ar = t.ar[a - 1] || '', tr = t.bn[a - 1] || '', h = Q.hifz, rv = !!Q.reveal[s + ':' + a];
     const hideAr = hifz && h.hide !== 'none' && !rv, hideTr = hifz && h.hide === 'all' && !rv;
     const memo = memoHas(s, a), mk = markHas(s, a);
+    const tfd = Q.tafsir[s];
+    const notes = tfd ? parseFootnotes(tfd.fn[a - 1]) : [];
     return '<article class="ayah' + (memo && hifz ? ' memo' : '') + '" id="ay-' + a + '" data-a="' + a + '"><div class="ay-h"><span class="ay-n">' + bn(a) + '</span><div class="ay-acts">' +
         '<button type="button" class="iconbtn sm" data-act="ay-play" data-a="' + a + '" aria-label="আয়াত ' + bn(a) + ' শুনুন">' + icon('play', 17, 2.2) + '</button>' +
         (hifz ? '<button type="button" class="iconbtn sm' + (memo ? ' act' : '') + '" data-act="memo" data-s="' + s + '" data-a="' + a + '" aria-pressed="' + memo + '" aria-label="মুখস্থ হয়েছে চিহ্নিত করুন">' + icon('check', 17, 3) + '</button>' : '') +
         '<button type="button" class="iconbtn sm' + (mk ? ' act' : '') + '" data-act="mark" data-s="' + s + '" data-a="' + a + '" aria-pressed="' + mk + '" aria-label="বুকমার্ক">' + icon('bookmark', 17, 2.1) + '</button></div></div>' +
         '<div class="ay-body' + (hideAr ? ' hid' : '') + '"><p class="ar-text' + (hideAr ? ' blur' : '') + '" lang="ar" dir="rtl" style="font-size:' + (S.set.arSize || 30) + 'px">' + esc(ar) + '</p>' +
         (hideAr ? '<button type="button" class="reveal-b" data-act="reveal" data-s="' + s + '" data-a="' + a + '">' + icon('eye', 18, 2.2) + ' ট্যাপ করে দেখুন</button>' : '') + '</div>' +
-        (S.set.showBn && tr ? '<p class="ay-tr' + (hideTr ? ' blur' : '') + '">' + esc(tr) + '</p>' : '') + '</article>';
+        (S.set.showBn && tr ? '<p class="ay-tr' + (hideTr ? ' blur' : '') + '">' + esc(tr) + (notes.length ? ' <button type="button" class="ay-note-b" data-act="ay-note" data-s="' + s + '" data-a="' + a + '" aria-label="আয়াত ' + bn(a) + ' এর ব্যাখ্যা">' + icon('info', 14, 2.4) + '</button>' : '') + '</p>' : '') + '</article>';
 }
 function readerHTML() {
     const s = Q.s, sur = SURAHS[s - 1], t = Q.text[s], hifz = Q.mode === 'hifz', last = S.quran.last;
