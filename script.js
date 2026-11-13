@@ -1405,10 +1405,11 @@ async function loadFootnoteTafsir(n) {
     const ck = 'fnt' + n;
     const c = await IDB.get(ck);
     if (c && c.tr && c.tr.length) { Q.tafsir[n] = c; return c; }
-    const j = await fetchJSONRetry('https://quranenc.com/api/v1/translation/sura/bengali_zakaria/' + n, 20000, 3);
-    if (!Array.isArray(j) || !j.length) throw new Error('empty');
+        const j = await fetchJSONRetry('https://quranenc.com/api/v1/translation/sura/bengali_zakaria/' + n, 20000, 3);
+    const rows = (j && j.result) || [];
+    if (!Array.isArray(rows) || !rows.length) throw new Error('empty');
     const tr = [], fn = [];
-    j.forEach((row, i) => {
+    rows.forEach((row, i) => {
         const a = (row && row.aya) ? (+row.aya) : (i + 1);
         tr[a - 1] = String((row && row.translation) || '');
         fn[a - 1] = (row && row.footnotes != null) ? row.footnotes : '';
