@@ -2011,7 +2011,7 @@ function ramadanCountdownHTML(standalone) {
     if (!next) return '';
     const ms = new Date(next + 'T00:00:00') - new Date();
     if (ms <= 0) return '';
-    return '<section class="card ramadan-card" aria-label="রমজান কাউন্টডাউন" data-ramadan="' + next + '">' +
+        return '<section class="card ramadan-card' + (standalone ? ' rm-themed' : '') + '" aria-label="রমজান কাউন্টডাউন" data-ramadan="' + next + '">' +
         '<svg class="rm-scene" viewBox="0 0 380 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>' +
         '<filter id="rmBlur"><feGaussianBlur stdDeviation="5"/></filter>' +
         '<radialGradient id="rmG1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffb347" stop-opacity=".85"/><stop offset="100%" stop-color="#ffb347" stop-opacity="0"/></radialGradient>' +
