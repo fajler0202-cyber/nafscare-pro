@@ -1615,6 +1615,24 @@ ACT['tafsir-retry'] = () => { Q.tfState = ''; ensureTafsir(); refreshUI(); };
 ACT['q-continue'] = () => { const l = S.quran.last; Q.mode = 'read'; openSurah(l.s || 1, l.a || 1); };
 ACT['listen-play'] = el => { const n = +el.dataset.s, P = Q.play, a = AUD(); if (P.kind === 'surah' && P.s === n && !P.ended) { if (a.paused) a.play().catch(() => { }); else a.pause(); } else playSurah(n); };
 ACT['ay-play'] = el => { const a = +el.dataset.a; playAyah(Q.s, a, { rep: 1 }); };
+function ayahNoteHTML(s, a) {
+    const tfd = Q.tafsir[s];
+    const notes = tfd ? parseFootnotes(tfd.fn[a - 1]) : [];
+    if (!notes.length) return '<p class="muted">এই আয়াতের জন্য আলাদা কোনো ব্যাখ্যা পাওয়া যায়নি।</p>';
+    return notes.map(nt => '<p class="tf-note"><b>[' + nt.n + ']</b> ' + esc(nt.text) + '</p>').join('') +
+        '<button type="button" class="btn outline wide" data-act="ay-note-full" data-s="' + s + '" data-a="' + a + '" style="margin-top:12px">পুরো তাফসীর দেখুন</button>';
+}
+ACT['ay-note'] = el => {
+    const s = +el.dataset.s, a = +el.dataset.a;
+    openSheet(ayahNoteHTML(s, a), { title: 'আয়াত ' + bn(a) + ' এর ব্যাখ্যা' });
+};
+ACT['ay-note-full'] = el => {
+    const s = +el.dataset.s, a = +el.dataset.a;
+    closeSheet(true);
+    Q.mode = 'tafsir'; Q.s = s; Q.reveal = {};
+    refreshUI();
+    setTimeout(() => { const el2 = $('#tf-' + a); if (el2) el2.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+};
 const markHas = (s, a) => S.quran.marks.some(m => m.s === s && m.a === a);
 ACT.mark = el => {
     const s = +el.dataset.s, a = +el.dataset.a;
