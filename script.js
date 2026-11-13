@@ -2005,7 +2005,7 @@ ACT['about-open'] = () => {
 };
 /* ===== অভ্যাস ত্যাগ ট্র্যাকার + রমজান কাউন্টডাউন ===== */
 const RAMADAN_DATES = ['2027-02-09', '2028-01-28'];
-function ramadanCountdownHTML() {
+function ramadanCountdownHTML(standalone) {
     const today = dkey();
     const next = RAMADAN_DATES.find(d => d >= today);
     if (!next) return '';
