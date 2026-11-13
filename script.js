@@ -2056,15 +2056,17 @@ function ramadanCountdownHTML() {
         '<p class="rm-note">আনুমানিক তারিখ, চাঁদ দেখার উপর নির্ভরশীল (১ দিন আগে-পরে হতে পারে)</p></div></section>';
 }
 function paintRamadanTick() {
-    const box = $('.ramadan-card'); if (!box) return;
-    const next = box.getAttribute('data-ramadan');
-    const ms = new Date(next + 'T00:00:00') - new Date();
-    if (ms <= 0) { renderTab('home'); return; }
-    const sec = Math.floor(ms / 1000);
-    const d = Math.floor(sec / 86400), h = Math.floor((sec % 86400) / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
-    const set = (id, v) => { const e = $('#' + id); if (e) e.textContent = bn(pad2(v)); };
-    set('rmD', d); set('rmH', h); set('rmM', m); set('rmS', s);
-   }
+    const boxes = $$('.ramadan-card'); if (!boxes.length) return;
+    boxes.forEach(box => {
+        const next = box.getAttribute('data-ramadan');
+        const ms = new Date(next + 'T00:00:00') - new Date();
+        if (ms <= 0) { renderTab('home'); return; }
+        const sec = Math.floor(ms / 1000);
+        const d = Math.floor(sec / 86400), h = Math.floor((sec % 86400) / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+        const set = (cls, v) => { const e = $(cls, box); if (e) e.textContent = bn(pad2(v)); };
+        set('.rm-d', d); set('.rm-h', h); set('.rm-m', m); set('.rm-s', s);
+    });
+}
 function habitsCardHTML() {
     const today = dkey();
     const rows = S.habits.map(h => {
