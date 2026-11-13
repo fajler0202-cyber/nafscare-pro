@@ -622,6 +622,22 @@ body.has-player .toasts { bottom: calc(190px + env(safe-area-inset-bottom, 0px))
 .rm-ar { font-size: 18px; text-align: center; line-height: 2; color: #f6d98a; margin-bottom: 6px; }
 .rm-bn { font-size: 12.5px; color: #e3dac2; line-height: 1.6; text-align: center; }
 .rm-note { font-size: 10.5px; color: #cdbfa0; margin-top: 10px; text-align: center; display: block; }
+/* --- Ramadan কার্ড: থিমের সাথে মিলিয়ে (শুধু হোমের নিচের একক কার্ডে, স্লাইডারে নয়) --- */
+.ramadan-card.rm-themed {
+    border-color: var(--line);
+    background: linear-gradient(180deg, var(--surface) 0%, var(--raised) 140%);
+    color: var(--text); box-shadow: var(--shadow);
+}
+.ramadan-card.rm-themed > .rm-scene { opacity: .5; }
+:root[data-theme="fajr"] .ramadan-card.rm-themed > .rm-scene, :root:not([data-theme]) .ramadan-card.rm-themed > .rm-scene { opacity: .2; }
+.ramadan-card.rm-themed .rm-top { color: #ca8a1e; }
+.ramadan-card.rm-themed .rm-top b { color: var(--text); text-shadow: none; }
+.ramadan-card.rm-themed .rm-u { background: var(--raised); border-color: var(--line); }
+.ramadan-card.rm-themed .rm-u b { color: var(--accent); }
+.ramadan-card.rm-themed .rm-u small { color: var(--muted); }
+.ramadan-card.rm-themed .rm-dua { background: var(--raised); border-color: var(--line); }
+.ramadan-card.rm-themed .rm-ar { color: var(--accent); }
+.ramadan-card.rm-themed .rm-bn, .ramadan-card.rm-themed .rm-note { color: var(--muted); }
 /* ---------- মোশন / এনিমেশন (ধাপ ১) ---------- */
 .tab.on { animation: tabFadeIn .3s cubic-bezier(.22,1,.36,1); }
 @keyframes tabFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
